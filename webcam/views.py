@@ -1,25 +1,25 @@
 from django.shortcuts import render
 import cv2
-import logging as log
-import datetime as dt
-# from django.http import HttpResponse
 from django.http import StreamingHttpResponse
 import numpy as np
-import time  # Import the time module
+import time
+import logging as log
+import datetime as dt
 
 cascPath = "C:/Users/User/Downloads/projectname-20230910T064614Z-001/projectname/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
-def face_detection(request):
-    # video_capture = cv2.VideoCapture("C:/Users/user/Desktop/new/projectname/30 Second.mp4")
-    video_capture = cv2.VideoCapture("C:/Users/User/Downloads/projectname-20230910T064614Z-001/projectname/turning.mp4")
+def face_detection_webcam(request):
+    # Open a connection to the default webcam (usually index 0)
+    video_capture = cv2.VideoCapture(0)
+
     anterior = 0
 
-    # frame_delay = 0.075  # Set the delay between frames (in seconds)
+    frame_delay = 0.075  # Set the delay between frames (in seconds)
 
     while True:
-        # Capture frame-by-frame
+        # Capture frame-by-frame from the webcam
         ret, frame = video_capture.read()
 
         if not ret:
@@ -50,12 +50,10 @@ def face_detection(request):
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
         # Introduce a delay between frames
-        # time.sleep(frame_delay)
+        time.sleep(frame_delay)
 
-def video_feed(request):
-    return  StreamingHttpResponse(face_detection(request), content_type='multipart/x-mixed-replace; boundary=frame')
+def webcam_video_feed(request):
+    return StreamingHttpResponse(face_detection_webcam(request), content_type='multipart/x-mixed-replace; boundary=frame')
 
-
-
-def video_stream(request):
-    return render(request, 'video_stream.html', {'video_stream_url': '/video_feed/'})
+def webcam_video_stream(request):
+    return render(request, 'webcam.html', {'video_stream_url': '/webcam_video_feed/'})
