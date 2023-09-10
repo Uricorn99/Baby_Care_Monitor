@@ -11,7 +11,7 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection_webcam(request):
-    # Open a connection to the default webcam (usually index 0)
+    ## Open a connection to the default webcam (usually index 0)
     video_capture = cv2.VideoCapture(0)
 
     anterior = 0
