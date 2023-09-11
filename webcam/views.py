@@ -11,18 +11,19 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection_webcam(request):
-    ## Open a connection to the default webcam (usually index 0)
+    # Open a connection to the default webcam (usually index 0)
     video_capture = cv2.VideoCapture(0)
 
     anterior = 0
 
-    frame_delay = 0.075  # Set the delay between frames (in seconds)
+    # frame_delay = 0.075  # Set the delay between frames (in seconds)
 
     while True:
         # Capture frame-by-frame from the webcam
         ret, frame = video_capture.read()
 
         if not ret:
+            print("cam failed")
             break
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -50,10 +51,10 @@ def face_detection_webcam(request):
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
         # Introduce a delay between frames
-        time.sleep(frame_delay)
+        # time.sleep(frame_delay)
 
 def webcam_video_feed(request):
     return StreamingHttpResponse(face_detection_webcam(request), content_type='multipart/x-mixed-replace; boundary=frame')
 
 def webcam_video_stream(request):
-    return render(request, 'webcam.html', {'video_stream_url': '/webcam_video_feed/'})
+    return render(request, 'webcam_codepen.html', {'video_stream_url': '/webcam_video_feed/'})

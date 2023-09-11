@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Page Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'video.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="input_video">
+            <img id="webcam-video-stream" src="" alt="Webcam Error">
+        </div>
+        <a class="abs logo" href="http://www.mediapipe.dev" target="_blank">
+            <div style="display: flex;align-items: center;bottom: 0;right: 10px;">
+              
+              <span class="title">Team 01</span>
+            </div>
+          </a>
+          <div class="shoutout">
+            <div>
+              <a href="https://solutions.mediapipe.dev/pose">
+                Click here
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="control-panel">
+        </div>
+        <div class='square-box'>
+          <div class="landmark-grid-container">
+          </div>
+    </div>
+    <div id="panel">
+        <h3>参数调整</h3>
+        <label for="paramA">準確率:</label>
+        <input type="range" id="paramA" min="0" max="10" value="5">
+        <span id="valueA">5</span>
+        <br>
+        <label for="paramB">維持時間:</label>
+        <input type="range" id="paramB" min="0" max="10" value="5">
+        <span id="valueB">5</span>
+        <br>
+        <label for="paramC">警告間隔:</label>
+        <input type="range" id="paramC" min="0" max="10" value="5">
+        <span id="valueC">5</span>
+        <br>
+        <label for="toggleNotification">通知:</label>
+        <input type="checkbox" id="toggleNotification" class="toggle-button">
+        <br>
+        <label for="toggleImage">影像:</label>
+        <input type="checkbox" id="toggleImage" class="toggle-button">
+    </div>
+
+
+
+    <script>
+        // Function to update the video stream
+        function updateVideoStream() {
+            const video = document.getElementById('webcam-video-stream');
+            video.src = '/webcam/video/'; // Replace with the correct URL for your video feed view
+            video.addEventListener('error', function (e) {
+                console.error('Error loading video:', e);
+            });
+        }
+
+        // Call the updateVideoStream function when the page loads
+        window.onload = function () {
+            updateVideoStream();
+        };
+    </script>
+    <script src="{% static 'video.js' %}"></script>
+</body>
+</html>

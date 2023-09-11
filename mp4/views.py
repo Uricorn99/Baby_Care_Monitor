@@ -16,7 +16,7 @@ def face_detection(request):
     video_capture = cv2.VideoCapture("C:/Users/User/Downloads/projectname-20230910T064614Z-001/projectname/turning.mp4")
     anterior = 0
 
-    # frame_delay = 0.075  # Set the delay between frames (in seconds)
+    frame_delay = 0.075  # Set the delay between frames (in seconds)
 
     while True:
         # Capture frame-by-frame
@@ -50,7 +50,7 @@ def face_detection(request):
                 b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
         # Introduce a delay between frames
-        # time.sleep(frame_delay)
+        time.sleep(frame_delay)
 
 def video_feed(request):
     return  StreamingHttpResponse(face_detection(request), content_type='multipart/x-mixed-replace; boundary=frame')
