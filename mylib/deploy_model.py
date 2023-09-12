@@ -109,7 +109,7 @@ class Yolo:
 
     def Object_Detect(
         self, image_rgb: cv2.Mat, thresh: float = 0.5, show_coordinates: bool = True
-    ) -> cv2.Mat:
+    ):
         """
         物件偵測
 
@@ -123,7 +123,7 @@ class Yolo:
 
         Returns:
 
-        物件偵測圖像(RGB)
+        物件偵測圖像(RGB), 偵測物件列表
         """
         # Resize to model dimensions
         image_resized = cv2.resize(
@@ -147,4 +147,4 @@ class Yolo:
         image_detections = darknet.draw_boxes(
             detections, image_resized, self.__class_colors
         )
-        return cv2.cvtColor(image_detections, cv2.COLOR_BGR2RGB)
+        return cv2.cvtColor(image_detections, cv2.COLOR_BGR2RGB), detections
