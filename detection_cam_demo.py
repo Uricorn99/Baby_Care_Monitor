@@ -24,7 +24,7 @@ while cap.isOpened():
 
     # Yolo Object Detection
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    image_detection = yolo.Object_Detect(frame_rgb)
+    image_detection, detections = yolo.Object_Detect(frame_rgb)
 
     # ----FPS calculation
     fps = int(1 / (time() - start_time))

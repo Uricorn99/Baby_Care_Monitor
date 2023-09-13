@@ -24,7 +24,7 @@ yolo = Yolo(config_file=cfg_file, data_file=data_file, weights=weight_file)
 # Yolo Object Detection
 frame = cv2.imread(img_path)
 frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-image_detection = yolo.Object_Detect(frame_rgb)
+image_detection, detections = yolo.Object_Detect(frame_rgb)
 
 cv2.imshow("result", image_detection)
 cv2.waitKey(0)
