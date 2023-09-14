@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.urls import path
+from api.views import test
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('mp4/', include('mp4.urls')),
     path('webcam/', include('webcam.urls')),
+    path('api/', test),
 ]
