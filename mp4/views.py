@@ -13,7 +13,7 @@ log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection(request):
     # video_capture = cv2.VideoCapture("C:/Users/user/Desktop/new/projectname/30 Second.mp4")
-    video_capture = cv2.VideoCapture("C:/Users/jd200/Desktop/facedetection/1.mp4")
+    video_capture = cv2.VideoCapture(0)
     anterior = 0
 
     frame_delay = 0.075  # Set the delay between frames (in seconds)

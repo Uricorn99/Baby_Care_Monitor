@@ -1,133 +1,89 @@
-// Function to update the video stream
-$(document).ready(function() {
-    function updateVideoStream() {
-        const video = $('#video-stream');
-        video.attr('src', '/mp4/video_feed/'); // Replace with the correct URL for your video feed view
-        video.on('error', function(e) {
-        console.error('Error loading video:', e);
-        });
-
-        // Hide the loading elements
-        const loadingElements = $('.loading');
-        loadingElements.css('display', 'none');
-    }
-
-    // Call the updateVideoStream function when the page loads
-    $(window).on('load', function() {
-        updateVideoStream();
-    });
-});
-
-
-// Function to update the video stream
-$(document).ready(function() {
-    function updateVideoStream() {
-        const video = $('#webcam-video-stream');
-        video.attr('src', '/webcam/video/'); // Replace with the correct URL for your video feed view
-        video.on('error', function(e) {
-        console.error('Error loading video:', e);
-        });
-
-        // Hide the loading elements
-        const loadingElements = $('.loading');
-        loadingElements.css('display', 'none');
-    }
-
-    // Call the updateVideoStream function when the page loads
-    $(window).on('load', function() {
-        updateVideoStream();
-    });
-});
-
-
-
-$(document).ready(function() {
-    var panel = $("#panel");
-    var paramA = $("#paramA");
-    var paramB = $("#paramB");
-    var paramC = $("#paramC");
-    var toggleNotification = $("#toggleNotification");
-    var toggleImage = $("#toggleImage"); 
-  });
-  
-
 $(document).ready(function () {
-    // Event listeners for paramA, paramB, and paramC
-    $("#paramA").on("click", function () {
-        updateValue("valueA", $(this).val());
-    });
+    const video1 = $('#video-stream');
+    const video2 = $('#webcam-video-stream');
 
-    $("#paramB").on("click", function () {
-        updateValue("valueB", $(this).val());
-    });
+    if (video1.length > 0) {
+        updateVideoStream1(video1);
+    } else if (video2.length > 0) {
+        updateVideoStream2(video2);
+    }
+    // 定义 sendParamBackEnd 函数
+    function sendParamBackEnd() {
+        // 获取参数的值
+        let paramAValue = $('#paramA').val();
+        let paramBValue = $('#paramB').val();
+        let paramCValue = $('#paramC').val();
+        let toggleNotificationValue = $('#toggleNotification').is(':checked');
+        let toggleImageValue = $('#toggleImage').is(':checked');
 
-    $("#paramC").on("click", function () {
-        updateValue("valueC", $(this).val());
-    });
+        // 发送到后端的逻辑
+        let url = "http://127.0.0.1:8000/api/";
 
-    // Event listener for toggleNotification
-    $("#toggleNotification").on("change", function () {
-        if ($(this).is(":checked")) {
-            alert("通知已啟用"); // You can replace this with your notification logic
-        } else {
-            // Toggle button is unchecked
+        axios.get(url, {
+            params: {
+                param_a: paramAValue,
+                param_b: paramBValue,
+                param_c: paramCValue,
+                toggle_notification: toggleNotificationValue,
+                toggle_image: toggleImageValue
+            }
+        }).then((response) => {
+            console.log(response.data); // 成功处理后端响应
+        }).catch((error) => {
+            console.log(error); // 发送失败时处理错误
+        });
+    }
+
+    // 绑定事件监听器以跟踪参数的更改
+    $('#paramA, #paramB, #paramC, #toggleNotification, #toggleImage').on('change', function () {
+        // 更新相应参数的值
+        if (this.id === 'paramA' || this.id === 'paramB' || this.id === 'paramC') {
+            updateValue('value' + this.id.charAt(5), $(this).val());
         }
+
+        // 调用 sendParamBackEnd 函数
+        sendParamBackEnd();
     });
 
-    // Event listener for toggleImage
-    $("#toggleImage").on("change", function () {
-        if ($(this).is(":checked")) {
-            alert("影像已啟用"); // You can replace this with your image-related logic
-        } else {
-            // Toggle button is unchecked
-        }
-    });
+    // 函数来更新值
+    function updateValue(elementId, value) {
+        $("#" + elementId).text(value);
+    }
 
-    // Event listener for panel mouseenter
+    // 面板功能
     $("#panel").on("mouseenter", function () {
         $(this).css("left", "0");
     });
 
-    // Event listener for panel mouseleave
     $("#panel").on("mouseleave", function () {
         $(this).css("left", "-320px"); // 隐藏面板在左侧屏幕外
     });
 
-    // Function to update value
-    function updateValue(elementId, value) {
-        $("#" + elementId).text(value);
-
-    // Event listeners for paramA, paramB, and paramC
-    $('#paramA, #paramB, #paramC').on('click', sendParamBackEnd);
-
-    // Event listeners for toggleNotification and toggleImage
-    $('#toggleNotification, #toggleImage').on('change', sendParamBackEnd);
+    function updateVideoStream1() {
+        const video = $('#video-stream');
+        const loadingElement = $('.loading'); // 获取loading元素   
+        video.attr('src', '/mp4/video_feed/'); // 替换为你的第一个视频URL
+        video.on('error', function (e) {
+            console.error('Error loading video:', e);
+            loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
+        });
     
-
+        video.on('load', function () {
+            loadingElement.css('display', 'none'); // 隐藏loading，当视频成功加载时
+        });
+    }
+    
+    function updateVideoStream2() {
+        const video = $('#webcam-video-stream');
+        const loadingElement = $('.loading'); // 获取loading元素
+        video.attr('src', '/webcam/video/'); // 替换为你的第二个视频URL
+        video.on('error', function (e) {
+            console.error('Error loading video:', e);
+            loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
+        });
+    
+        video.on('load', function () {
+            loadingElement.css('display', 'none'); // 隐藏loading，当视频成功加载时
+        });
     }
 });
-
-
-function sendParamBackEnd() {
-    let paramAValue = $('#paramA').val();
-    let paramBValue = $('#paramB').val();
-    let paramCValue = $('#paramC').val();
-    let toggleNotificationValue = $('#toggleNotification').is(':checked');
-    let toggleImageValue = $('#toggleImage').is(':checked');
-
-    let url = "http://127.0.0.1:8000/api/";
-
-    axios.get(url, {
-        params: {
-            param_a: paramAValue,
-            param_b: paramBValue,
-            param_c: paramCValue,
-            toggle_notification: toggleNotificationValue,
-            toggle_image: toggleImageValue
-        }
-    }).then((response) => {
-        console.log(response.data); // 成功处理后端响应
-    }).catch((error) => {
-        console.log(error); // 发送失败时处理错误
-    });
-}
