@@ -1,2 +1,6 @@
-__pycache__
+.vscode
+__pycache__/
+cfg
+data
+weights
 webcam.log
