@@ -14,9 +14,9 @@ log.basicConfig(filename="webcam.log", level=log.INFO)
 
 def obj_detection_webcam(request):
     # Parameters
-    cfg_file = "cfg/yolo-obj.cfg"  # 模型配置
-    data_file = "data/obj.data"  # 資料集路徑
-    weight_file = "weights/yolo-obj_best.weights"  # 權重
+    cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
+    data_file = "data/pose.data"  # 資料集路徑
+    weight_file = "weights/yolov4-cfg-train_best.weights"  # 權重
 
     # Yolo 載入模型
     yolo = Yolo(config_file=cfg_file, data_file=data_file, weights=weight_file)

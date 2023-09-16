@@ -7,13 +7,13 @@ from django.http import StreamingHttpResponse
 import numpy as np
 import time  # Import the time module
 
-cascPath = "C:/Users/User/Downloads/projectname-20230910T064614Z-001/projectname/haarcascade_frontalface_default.xml"
+cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection(request):
     # video_capture = cv2.VideoCapture("C:/Users/user/Desktop/new/projectname/30 Second.mp4")
-    video_capture = cv2.VideoCapture("C:/Users/User/Downloads/projectname-20230910T064614Z-001/projectname/turning.mp4")
+    video_capture = cv2.VideoCapture(0)
     anterior = 0
 
     frame_delay = 0.075  # Set the delay between frames (in seconds)

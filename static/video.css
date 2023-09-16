@@ -1,36 +1,46 @@
+/* body{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top:0;
+  left:0;
+  background-color: #99999999;
+} */
+
 @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}
   
-  .abs {
+  /* .abs {
     position: absolute;
   }
-  
-  a {
+   */
+  /* a {
     color: white;
     text-decoration: none;
     &:hover {
       color: lightblue;
     }
-  }
+  } */
   
-  body {
-    bottom: 0;
-    font-family: 'Titillium Web', sans-serif;
-    color: white;
-    left: 0;
-    margin: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform-origin: 0px 0px;
-    overflow: hidden;
-  }
+body {
+  bottom: 0;
+  font-family: 'Titillium Web', sans-serif;
+  color: white;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform-origin: 0px 0px;
+  overflow: hidden;
+  background-color: #99999999;
+}
 
 
 
@@ -63,23 +73,23 @@
     max-height: 100%;
   } */
   
-  .input_video {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    &.selfie {
-      transform: scale(-1, 1);
-    }
+.input_video {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  &.selfie {
+    transform: scale(-1, 1);
   }
+}
+
+.input_image {
+  position: absolute;
+}
   
-  .input_image {
-    position: absolute;
-  }
-  
-  .canvas-container {
+  /* .canvas-container {
     display:flex;
     height: 100%;
     width: 100%;
@@ -93,129 +103,136 @@
     position: relative;
     left: 0;
     top: 0;
+  } */
+  
+.logo {
+  bottom: 10px;
+  right: 20px;
+
+  .title {
+    color: white;
+    font-size: 28px;
   }
-  
-  .logo {
-    bottom: 10px;
-    right: 20px;
-  
-    .title {
-      color: white;
-      font-size: 28px;
-    }
-  
-    .subtitle {
-      position: relative;
-      color: white;
-      font-size: 10px;
-      left: -30px;
-      top: 20px;
-    }
+
+  .subtitle {
+    position: relative;
+    color: white;
+    font-size: 10px;
+    left: -30px;
+    top: 20px;
   }
+}
   
-  .control-panel {
+  /* .control-panel {
     position: absolute;
     left: 10px;
     top: 10px;
-  }
+  } */
   
-  .loading {
-    display: flex;
+.loading {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  backface-visibility: hidden;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 1s;
+
+  .message {
+    font-size: x-large;
+  }
+
+  .spinner {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    align-items: center;
-    backface-visibility: hidden;
-    justify-content: center;
-    opacity: 1;
-    transition: opacity 1s;
-  
-    .message {
-      font-size: x-large;
-    }
-  
-    .spinner {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      animation: spin 1s linear infinite;
-      border: 32px solid #bebebe;
-      border-top: 32px solid #3498db;
-      border-radius: 50%;
-    }
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+    border: 32px solid #bebebe;
+    border-top: 32px solid #3498db;
+    border-radius: 50%;
   }
+}
+
+
+/* .loaded .loading {
+  opacity: 0;
+} */
   
-  .loaded .loading {
-    opacity: 0;
-  }
-  
-  .shoutout {
+  /* .shoutout {
     left: 0;
     right: 0;
     bottom: 40px;
     text-align: center;
     font-size: 24px;
     position: absolute;
-  }
-      #panel {
-              width: 300px;
-              background-color: black;
-              color: white;
-              padding: 20px;
-              position: absolute;
-              left: -320px;
-              top: 0;
-              bottom: 0;
-              transition: left 0.3s;
-              border-top-right-radius: 15px; /* Add rounded corners to the top left */
-              border-bottom-right-radius: 15px; /* Add rounded corners to the bottom left */
-          }
-  
-          /* Center-align text inside labels */
-          h3 {
-              text-align: center;
-          }
-  
+  } */
+#panel {
+        width: 300px;
+        background-color: black;
+        color: white;
+        padding: 20px;
+        position: absolute;
+        left: -320px;
+        top: 0;
+        bottom: 0;
+        transition: left 0.3s;
+        border-top-right-radius: 15px; /* Add rounded corners to the top left */
+        border-bottom-right-radius: 15px; /* Add rounded corners to the bottom left */
+    }
+
+    /* Center-align text inside labels */
+h3 {
+    text-align: center;
+}
+
   /* Add styling for the toggle button */
-  .toggle-button {
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      width: 50px;
-      height: 24px;
-      background-color: #ccc;
-      border-radius: 12px;
-      outline: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      margin-left: 5px;
-  }
-  
-  .toggle-button:checked {
-      background-color: #3498db;
-  }
-  
-  .toggle-button::before {
-      content: "";
-      position: relative;
-      display: block;
-      width: 24px;
-      height: 24px;
-      background-color: white;
-      border-radius: 50%;
-      left: 2px;
-      transition: left 0.3s;
-  }
-  
-  .toggle-button:checked::before {
-      left: 24px;
-  }
-  
-  
-  /* 添加上下边距以平均分隔滑块和按钮 */
-  #paramA, #paramB, #paramC, #toggleNotification, #toggleImage {
-      margin-top: 20px; /* 调整上边距 */
-      margin-bottom: 20px; /* 调整下边距 */
-  }
+.toggle-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 5px;
+}
+
+.toggle-button:checked {
+    background-color: #3498db;
+}
+
+.toggle-button::before {
+    content: "";
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    left: 2px;
+    transition: left 0.3s;
+}
+
+.toggle-button:checked::before {
+    left: 24px;
+}
+
+/* 添加上下边距以平均分隔滑块和按钮 */
+#paramA, #paramB, #paramC, #toggleNotification, #toggleImage {
+    margin-top: 50px; /* 调整上边距 */
+    margin-bottom: 20px; /* 调整下边距 */
+}
+
+.team{
+  position: absolute; /* 使用绝对定位 */
+  bottom: 0; /* 位于底部 */
+  right: 0; /* 位于右侧 */
+  font-size: 30px;
+}
