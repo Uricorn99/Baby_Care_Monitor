@@ -7,7 +7,7 @@ import logging as log
 import datetime as dt
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
-
+from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)
 
@@ -26,6 +26,8 @@ def obj_detection_webcam(request):
     video_capture, video_writer, video_height, video_width = cv.cam_init(0)
 
     anterior = 0
+    # Mediapipe 偵測器載入
+    MediapipeDetector_working = MediapipeDetector()
 
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
 
@@ -41,9 +43,18 @@ def obj_detection_webcam(request):
             break
 
         # 轉換色彩空間 BGR -> RGB
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        # TODO: BradyFan 需確認要 Yolo 最終是用原圖疊加骨架或者空白背景骨架
+        detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
+        # blank_frame = MediapipeDetector_working.draw_blank(detection_face, detection_pose) # 繪製空白背景骨架圖
+        overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
+        
+        # blank_frame_rgb = cv2.cvtColor(blank_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+
         # Yolo Object Detection
-        image_detection, detections = yolo.Object_Detect(frame_rgb)
+        image_detection, detections = yolo.Object_Detect(overlay_frame_rgb)
 
         # 偵測到物件時紀錄
         if anterior != len(detections):
