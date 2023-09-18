@@ -5,6 +5,7 @@ import numpy as np
 from time import time
 import logging as log
 import datetime as dt
+import threading
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
@@ -13,23 +14,35 @@ log.basicConfig(filename="webcam.log", level=log.INFO)
 
 
 def obj_detection_webcam(request):
+    # Vars
+    yolo = Yolo()
+    # Mediapipe 偵測器載入
+    MediapipeDetector_working = MediapipeDetector()
+
     # Parameters
     cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
     data_file = "data/pose.data"  # 資料集路徑
     weight_file = "weights/yolov4-cfg-train_best.weights"  # 權重
 
-    # Yolo 載入模型
-    yolo = Yolo(config_file=cfg_file, data_file=data_file, weights=weight_file)
+    # 建立新的執行緒讓 Yolo 載入模型
+    yolo_loadNet_thread = threading.Thread(
+        target=yolo.Load_Net, args=(cfg_file, data_file, weight_file)
+    )
+    # 強制跟主執行緒一起結束
+    yolo_loadNet_thread.setDaemon(True)
+    # 執行緒開始運行
+    yolo_loadNet_thread.start()
 
     # Open a connection to the default webcam (usually index 0)
     # video_capture = cv2.VideoCapture(0)
     video_capture, video_writer, video_height, video_width = cv.cam_init(0)
 
     anterior = 0
-    # Mediapipe 偵測器載入
-    MediapipeDetector_working = MediapipeDetector()
-
+    
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
+
+    # 等候執行緒完成
+    yolo_loadNet_thread.join()
 
     while video_capture.isOpened():  # 檢查 cam 是否開啟
         # record start time
