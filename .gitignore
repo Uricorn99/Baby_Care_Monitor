@@ -3,4 +3,4 @@ __pycache__/
 cfg
 data
 weights
-webcam.log
+*.log
