@@ -10,40 +10,36 @@
 </head>
 <body>
     <div class="container">
-      <div id="video-container">
-        <img id="video-stream" src="" alt="Video Stream" style="max-width: 100%;">
-      </div>
-      <div class="loading">
-        <div class="spinner"></div>
-        <div class="message">
-          Loading
+        <div class="input_video">
+          <img id="video-stream" src="" alt="Video Stream" style="max-width: 100%;">
         </div>
+        <div class="loading">
+          <div class="spinner"></div>
+          <div class="message">
+            Loading
+          </div>
+        </div>
+        <div class="team">Team 01</div>
       </div>
-      <div class="team">Team 01</div>
-    </div>
-    
+      
     <div id="panel">
         <h3>参数调整</h3>
-        <span for="paramA">準確率:</span>
-        <input type="range" id="paramA" min="0" max="10" value="5">
-        <span id="valueA">5</span>
+        <span for="acc">準確率</span>
+        <input type="range" id="acc" min="0" max="1" value="0.5" step="0.1">
+        <span id="value_acc">0.5</span>
         <br>
-        <span for="paramB">維持時間:</span>
-        <input type="range" id="paramB" min="0" max="10" value="5">
-        <span id="valueB">5</span>
+        <span for="dangertime">維持時間(秒)</span>
+        <input type="range" id="dangertime" min="10" max="300" value="30" step="1">
+        <span id="value_dangertime">30</span>
         <br>
-        <span for="paramC">警告間隔:</span>
-        <input type="range" id="paramC" min="0" max="10" value="5">
-        <span id="valueC">5</span>
+        <span for="warningtime">警告間隔(分鐘)</span>
+        <input type="range" id="warningtime" min="1" max="120" value="10" step="1">
+        <span id="value_warningtime">10</span>
         <br>
         <span for="toggleNotification">通知:</span>
-        <input type="checkbox" id="toggleNotification" class="toggle-button">
-        <br>
-        <span for="toggleImage">影像:</span>
-        <input type="checkbox" id="toggleImage" class="toggle-button">
+        <input type="checkbox" id="toggleNotification" class="toggle-button" checked="">    
     </div>
-
+  
     <script src="{% static 'video.js' %}"></script>
-
 </body>
 </html>

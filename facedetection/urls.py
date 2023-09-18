@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.urls import path
-from api.views import test
+from api.views import get_data_from_request
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('mp4/', include('mp4.urls')),
     path('webcam/', include('webcam.urls')),
-    path('api/', test),
+    path('api/', get_data_from_request),
+    path('Mediapipe/', include('Mediapipe.urls')),
 ]

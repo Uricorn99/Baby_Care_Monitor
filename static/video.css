@@ -1,33 +1,3 @@
-/* body{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top:0;
-  left:0;
-  background-color: #99999999;
-} */
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-  
-  /* .abs {
-    position: absolute;
-  }
-   */
-  /* a {
-    color: white;
-    text-decoration: none;
-    &:hover {
-      color: lightblue;
-    }
-  } */
-  
 body {
   bottom: 0;
   font-family: 'Titillium Web', sans-serif;
@@ -39,19 +9,17 @@ body {
   top: 0;
   transform-origin: 0px 0px;
   overflow: hidden;
-  background-color: #99999999;
+  background-color: #7295ad;
 }
 
 
-
-/* 设置影片容器为全屏大小 */
-#video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 将视频设置为背景 */
@@ -65,13 +33,60 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* 将视频设置为背景 */
+#video-stream {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
   
-  /* .container {
-    position: absolute;
-    background-color: #596e73;
-    width: 100%;
-    max-height: 100%;
-  } */
+#body1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+}
+
+
+.container1 {
+  border: 10px outset rgba(47, 129, 170, 0.729);
+  outline: 4px solid rgba(240, 230, 140, 0.777);
+  box-shadow: 0 0 0 12px rgba(135, 207, 235, 0.666);
+  border-radius: 12px;
+  font: bold 10px sans-serif;
+  padding: 10px;
+  outline-offset: 5px;
+  position: relative;
+  margin-right: 2%;
+  width: 40%;
+  height: 70%;
+  background-color: #7295ad;
+}
+
+.container2 {
+  border: 10px outset rgba(47, 129, 170, 0.729);
+  outline: 4px solid rgba(240, 230, 140, 0.777);
+  box-shadow: 0 0 0 12px rgba(135, 207, 235, 0.666);
+  border-radius: 12px;
+  font: bold 10px sans-serif;
+  padding: 10px;
+  outline-offset: 5px;
+  position: relative;
+  margin-left: 2%;
+  width: 40%;
+  height: 70%;
+  background-color: #7295ad;
+}
+
+
   
 .input_video {
   display: block;
@@ -89,45 +104,6 @@ body {
   position: absolute;
 }
   
-  /* .canvas-container {
-    display:flex;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items:center;
-  }
-  
-  .output_canvas {
-    width: 100%;
-    display: block;
-    position: relative;
-    left: 0;
-    top: 0;
-  } */
-  
-.logo {
-  bottom: 10px;
-  right: 20px;
-
-  .title {
-    color: white;
-    font-size: 28px;
-  }
-
-  .subtitle {
-    position: relative;
-    color: white;
-    font-size: 10px;
-    left: -30px;
-    top: 20px;
-  }
-}
-  
-  /* .control-panel {
-    position: absolute;
-    left: 10px;
-    top: 10px;
-  } */
   
 .loading {
   display: flex;
@@ -157,37 +133,55 @@ body {
   }
 }
 
+.loading1 {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  backface-visibility: hidden;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 1s;
 
-/* .loaded .loading {
-  opacity: 0;
-} */
-  
-  /* .shoutout {
-    left: 0;
-    right: 0;
-    bottom: 40px;
-    text-align: center;
-    font-size: 24px;
+  .message {
+    font-size: x-large;
+  }
+
+  .spinner {
     position: absolute;
-  } */
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+    border: 32px solid #bebebe;
+    border-top: 32px solid #3498db;
+    border-radius: 50%;
+  }
+}
+
+
 #panel {
-        width: 300px;
-        background-color: black;
-        color: white;
-        padding: 20px;
-        position: absolute;
-        left: -320px;
-        top: 0;
-        bottom: 0;
-        transition: left 0.3s;
-        border-top-right-radius: 15px; /* Add rounded corners to the top left */
-        border-bottom-right-radius: 15px; /* Add rounded corners to the bottom left */
-    }
+    width: 300px;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    position: absolute;
+    left: -320px;
+    top: 0;
+    bottom: 0;
+    transition: left 0.3s;
+    border-top-right-radius: 15px; /* Add rounded corners to the top left */
+    border-bottom-right-radius: 15px; /* Add rounded corners to the bottom left */
+}
 
     /* Center-align text inside labels */
 h3 {
     text-align: center;
 }
+
+
 
   /* Add styling for the toggle button */
 .toggle-button {
@@ -224,10 +218,9 @@ h3 {
     left: 24px;
 }
 
-/* 添加上下边距以平均分隔滑块和按钮 */
-#paramA, #paramB, #paramC, #toggleNotification, #toggleImage {
-    margin-top: 50px; /* 调整上边距 */
-    margin-bottom: 20px; /* 调整下边距 */
+#acc, #dangertime, #warningtime, #toggleNotification {
+    margin-top: 50px; 
+    margin-bottom: 20px; 
 }
 
 .team{

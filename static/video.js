@@ -10,22 +10,22 @@ $(document).ready(function () {
     // 定义 sendParamBackEnd 函数
     function sendParamBackEnd() {
         // 获取参数的值
-        let paramAValue = $('#paramA').val();
-        let paramBValue = $('#paramB').val();
-        let paramCValue = $('#paramC').val();
+        let accValue = $('#acc').val();
+        let dangertimeValue = $('#dangertime').val();
+        let warningtimeValue = $('#warningtime').val();
         let toggleNotificationValue = $('#toggleNotification').is(':checked');
-        let toggleImageValue = $('#toggleImage').is(':checked');
+        
 
         // 发送到后端的逻辑
         let url = "http://127.0.0.1:8000/api/";
 
         axios.get(url, {
             params: {
-                param_a: paramAValue,
-                param_b: paramBValue,
-                param_c: paramCValue,
+                acc: accValue,
+                dangertime: dangertimeValue,
+                warningtime: warningtimeValue,
                 toggle_notification: toggleNotificationValue,
-                toggle_image: toggleImageValue
+                
             }
         }).then((response) => {
             console.log(response.data); // 成功处理后端响应
@@ -35,16 +35,20 @@ $(document).ready(function () {
     }
 
     // 绑定事件监听器以跟踪参数的更改
-    $('#paramA, #paramB, #paramC, #toggleNotification, #toggleImage').on('change', function () {
+    $('#acc, #dangertime, #warningtime').on('input', function () {
         // 更新相应参数的值
-        if (this.id === 'paramA' || this.id === 'paramB' || this.id === 'paramC') {
-            updateValue('value' + this.id.charAt(5), $(this).val());
+        if (this.id === 'acc' || this.id === 'dangertime' || this.id === 'warningtime') {
+            updateValue('value_' + this.id, $(this).val());
         }
+    });
 
-        // 调用 sendParamBackEnd 函数
+    // 绑定事件调用 sendParamBackEnd 函数
+    $('#acc, #dangertime, #warningtime, #toggleNotification').on('change', function () {
+     
         sendParamBackEnd();
     });
 
+    
     // 函数来更新值
     function updateValue(elementId, value) {
         $("#" + elementId).text(value);

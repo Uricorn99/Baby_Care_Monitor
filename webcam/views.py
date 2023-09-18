@@ -7,6 +7,8 @@ import logging as log
 import datetime as dt
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
+from api.views import *
+
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)

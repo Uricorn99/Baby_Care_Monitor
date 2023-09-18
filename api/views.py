@@ -3,29 +3,40 @@ from django.shortcuts import render
 # Create your views here.
 
 from django.http import JsonResponse
+
 global_param = {
-        "param_a": None,
-        "param_b": None,
-        "param_c": None,
-        "toggle_notification": False,
-        "toggle_image": False,
+        "acc": 0.5,
+        "dangertime": 30,
+        "warningtime": 10,
+        "toggle_notification": True,
+        
 }
-def test(request):
+
+def get_param():
+    return global_param
+
+
+def get_data_from_request(request):
     # 从请求中获取参数
-    param_a = request.GET.get('param_a')
-    param_b = request.GET.get('param_b')
-    param_c = request.GET.get('param_c')
+    acc = request.GET.get('acc')
+    dangertime = request.GET.get('dangertime')
+    warningtime = request.GET.get('warningtime')
     toggle_notification = request.GET.get('toggle_notification')
-    toggle_image = request.GET.get('toggle_image')
+    
 
     # 构建要返回的数据
-    global_param = {
-        "param_a": param_a,
-        "param_b": param_b,
-        "param_c": param_c,
-        "toggle_notification": toggle_notification,
-        "toggle_image": toggle_image,
-    }
+    # global_param = {
+    #     "acc": acc,
+    #     "dangertime": dangertime,
+    #     "warningtime": warningtime,
+    #     "toggle_notification": toggle_notification,
+        
+    # }
+    global_param['acc']=acc
+    global_param['dangertime']=dangertime
+    global_param['warningtime']=warningtime
+    global_param['toggle_notification']=toggle_notification
+
 
     # 返回 JSON 响应
     response = JsonResponse(global_param, status=200)

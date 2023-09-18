@@ -23,44 +23,23 @@
       </div>
       
       <div id="panel">
-          <h3>参数调整</h3>
-          <span for="paramA">準確率:</span>
-          <input type="range" id="paramA" min="0" max="10" value="5">
-          <span id="valueA">5</span>
-          <br>
-          <span for="paramB">維持時間:</span>
-          <input type="range" id="paramB" min="0" max="10" value="5">
-          <span id="valueB">5</span>
-          <br>
-          <span for="paramC">警告間隔:</span>
-          <input type="range" id="paramC" min="0" max="10" value="5">
-          <span id="valueC">5</span>
-          <br>
-          <span for="toggleNotification">通知:</span>
-          <input type="checkbox" id="toggleNotification" class="toggle-button">
-          <br>
-          <span for="toggleImage">影像:</span>
-          <input type="checkbox" id="toggleImage" class="toggle-button">
-      </div>
-  
+        <h3>参数调整</h3>
+        <span for="acc">準確率</span>
+        <input type="range" id="acc" min="0" max="1" value="0.5" step="0.1">
+        <span id="value_acc">0.5</span>
+        <br>
+        <span for="dangertime">維持時間(秒)</span>
+        <input type="range" id="dangertime" min="10" max="300" value="30" step="1">
+        <span id="value_dangertime">30</span>
+        <br>
+        <span for="warningtime">警告間隔(分鐘)</span>
+        <input type="range" id="warningtime" min="1" max="120" value="10" step="1">
+        <span id="value_warningtime">10</span>
+        <br>
+        <span for="toggleNotification">通知:</span>
+        <input type="checkbox" id="toggleNotification" class="toggle-button" checked="">    
+    </div>
 
-
-
-    <!-- <script>
-        // Function to update the video stream
-        function updateVideoStream() {
-            const video = document.getElementById('webcam-video-stream');
-            video.src = '/webcam/video/'; // Replace with the correct URL for your video feed view
-            video.addEventListener('error', function (e) {
-                console.error('Error loading video:', e);
-            });
-        }
-
-        // Call the updateVideoStream function when the page loads
-        window.onload = function () {
-            updateVideoStream();
-        };
-    </script> -->
     <script src="{% static 'video.js' %}"></script>
 </body>
 </html>

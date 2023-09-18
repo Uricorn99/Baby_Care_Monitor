@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "mp4",
-    "webcam"
+    "webcam",
+    "Mediapipe",
 ]
 
 MIDDLEWARE = [
