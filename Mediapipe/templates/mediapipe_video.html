@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Baby Webcam</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'video_m.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="body1">
+    <div class="container1">
+      <div class="input_video">
+        <img id="original-stream" src="" alt="original Stream" style="max-width: 100%;">
+        <div id="loading2">
+          <div class="spinner"></div>
+          <div class="message">
+            Loading
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <div class="input_video">
+        <img id="mediapipe-stream" src="" alt="Mediapipe Stream" style="max-width: 100%;">
+        <div id="loading3">
+          <div class="spinner"></div>
+          <div class="message">
+            Loading
+          </div>
+        </div>      
+      </div>
+    </div>
+    <div class="team">Team 01</div>
+  </div>
+
+  <div id="panel">
+    <div style="height: 10%;display: flex;">
+      <div style="width: 100%;display: flex;align-items: center;justify-content:center;color: rgb(255, 255, 255);font-size: 30px;font-weight: bold; margin-left: 15px;">使用者設定</div><div><img src="../static/setting.png"></div>
+    </div>
+    
+    <div style="display: flex;">
+      <div style="margin-top: 60px;"><img src="../static/acc.png"></div>
+      <div class="function">
+        <div class="func_title">
+          <span id="name_acc">準確率</span>
+          <span id="value_acc" style="margin-left: 10px;margin-top: 3px;">0.5</span>
+        </div>
+        <div class="func_value">
+          <input type="range" id="acc" min="0" max="1" value="0.5" step="0.1">
+        </div>
+      </div>
+    </div>
+    
+    <div style="display: flex;">
+      <div style="margin-top: 60px"><img src="../static/dangertime.png"></div>
+      <div class="function">
+        <div class="func_title">
+          <span id="name_dangertime">維持時間</span>
+          <span id="value_dangertime" style="margin-left: 10px;margin-top: 3px;">30</span>
+          <span>(秒)</span>
+        </div>
+        <div class="func_value">
+          <input type="range" id="dangertime" min="10" max="300" value="30" step="1">
+        </div>
+      </div>
+    </div>
+    
+    <div style="display: flex;">
+      <div style="margin-top: 60px"><img src="../static/warningtime.png"></div>
+      <div class="function">
+        <div class="func_title">
+          <span id="name_warningtime">警告間隔</span>
+          <span id="value_warningtime" style="margin-left: 10px;margin-top: 3px;">10</span>
+          <span>(分鐘)</span>
+        </div>
+        <div class="func_value">
+          <input type="range" id="warningtime" min="1" max="120" value="10" step="1">
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex;">
+      <div style="margin-top: 48px"><img src="../static/alert.png"></div>
+      <div class="function">
+        <div class="func_title">
+          <span id="name_toggleNotification" style="width: 70px; margin-top: 12px;">通知</span>       
+          <input type="checkbox" id="toggleNotification" class="toggle-button" checked="">
+        </div>
+      </div>
+    </div>
+  <div style="width: 100%; display: flex; position: absolute;  bottom: 30px;
+  left: 30px;"><img src="../static/baby.png"></div>
+  </div>
+
+    <script src="{% static 'video_m.js' %}"></script>
+
+</body>
+</html>

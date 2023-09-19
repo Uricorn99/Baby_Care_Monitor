@@ -4004,3 +4004,16 @@ INFO:root:faces: 0 at 2023-09-18 11:20:09.626563
 INFO:root:faces: 1 at 2023-09-18 11:20:13.456208
 INFO:root:faces: 0 at 2023-09-18 11:20:19.122527
 INFO:django.utils.autoreload:C:\Users\user\Desktop\facedetection\webcam\views.py changed, reloading.
+WARNING:django.request:Not Found: /
+WARNING:django.request:Not Found: /favicon.ico
+INFO:django.utils.autoreload:C:\Users\jd200\Desktop\facedetection\mp4\views.py changed, reloading.
+INFO:root:faces: 1 at 2023-09-19 20:25:34.857222
+INFO:root:faces: 0 at 2023-09-19 20:25:40.003525
+INFO:root:faces: 1 at 2023-09-19 20:25:44.392145
+INFO:root:faces: 0 at 2023-09-19 20:25:49.832773
+INFO:root:faces: 1 at 2023-09-19 20:25:53.128478
+INFO:root:faces: 1 at 2023-09-19 20:26:05.978637
+INFO:root:faces: 1 at 2023-09-19 20:26:20.114806
+INFO:root:faces: 0 at 2023-09-19 20:26:27.313413
+INFO:root:faces: 1 at 2023-09-19 20:26:33.895144
+INFO:root:faces: 0 at 2023-09-19 20:26:34.481380

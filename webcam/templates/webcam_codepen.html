@@ -13,7 +13,7 @@
         <div class="input_video">
             <img id="webcam-video-stream" src="" alt="Webcam Error">
         </div>
-        <div class="loading">
+        <div id="loading1">
           <div class="spinner"></div>
           <div class="message">
             Loading
@@ -22,22 +22,63 @@
         <div class="team">Team 01</div>
       </div>
       
-      <div id="panel">
-        <h3>参数调整</h3>
-        <span for="acc">準確率</span>
-        <input type="range" id="acc" min="0" max="1" value="0.5" step="0.1">
-        <span id="value_acc">0.5</span>
-        <br>
-        <span for="dangertime">維持時間(秒)</span>
-        <input type="range" id="dangertime" min="10" max="300" value="30" step="1">
-        <span id="value_dangertime">30</span>
-        <br>
-        <span for="warningtime">警告間隔(分鐘)</span>
-        <input type="range" id="warningtime" min="1" max="120" value="10" step="1">
-        <span id="value_warningtime">10</span>
-        <br>
-        <span for="toggleNotification">通知:</span>
-        <input type="checkbox" id="toggleNotification" class="toggle-button" checked="">    
+    <div id="panel">
+      <div style="height: 10%;display: flex;">
+        <div style="width: 100%;display: flex;align-items: center;justify-content:center;color: rgb(255, 255, 255);font-size: 30px;font-weight: bold; margin-left: 15px;">使用者設定</div><div><img src="../static/setting.png"></div>
+      </div>
+      
+      <div style="display: flex;">
+        <div style="margin-top: 60px;"><img src="../static/acc.png"></div>
+        <div class="function">
+          <div class="func_title">
+            <span id="name_acc">準確率</span>
+            <span id="value_acc" style="margin-left: 10px;margin-top: 3px;">0.5</span>
+          </div>
+          <div class="func_value">
+            <input type="range" id="acc" min="0" max="1" value="0.5" step="0.1">
+          </div>
+        </div>
+      </div>
+      
+      <div style="display: flex;">
+        <div style="margin-top: 60px"><img src="../static/dangertime.png"></div>
+        <div class="function">
+          <div class="func_title">
+            <span id="name_dangertime">維持時間</span>
+            <span id="value_dangertime" style="margin-left: 10px;margin-top: 3px;">30</span>
+            <span>(秒)</span>
+          </div>
+          <div class="func_value">
+            <input type="range" id="dangertime" min="10" max="300" value="30" step="1">
+          </div>
+        </div>
+      </div>
+      
+      <div style="display: flex;">
+        <div style="margin-top: 60px"><img src="../static/warningtime.png"></div>
+        <div class="function">
+          <div class="func_title">
+            <span id="name_warningtime">警告間隔</span>
+            <span id="value_warningtime" style="margin-left: 10px;margin-top: 3px;">10</span>
+            <span>(分鐘)</span>
+          </div>
+          <div class="func_value">
+            <input type="range" id="warningtime" min="1" max="120" value="10" step="1">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex;">
+        <div style="margin-top: 48px"><img src="../static/alert.png"></div>
+        <div class="function">
+          <div class="func_title">
+            <span id="name_toggleNotification" style="width: 70px; margin-top: 12px;">通知</span>       
+            <input type="checkbox" id="toggleNotification" class="toggle-button" checked="">
+          </div>
+        </div>
+      </div>
+    <div style="width: 100%; display: flex; position: absolute;  bottom: 30px;
+    left: 30px;"><img src="../static/baby.png"></div>
     </div>
 
     <script src="{% static 'video.js' %}"></script>

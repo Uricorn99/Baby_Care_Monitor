@@ -24,14 +24,7 @@ def get_data_from_request(request):
     toggle_notification = request.GET.get('toggle_notification')
     
 
-    # 构建要返回的数据
-    # global_param = {
-    #     "acc": acc,
-    #     "dangertime": dangertime,
-    #     "warningtime": warningtime,
-    #     "toggle_notification": toggle_notification,
-        
-    # }
+
     global_param['acc']=acc
     global_param['dangertime']=dangertime
     global_param['warningtime']=warningtime

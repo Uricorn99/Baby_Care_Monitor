@@ -6,7 +6,7 @@ from time import time
 import logging as log
 import datetime as dt
 from mylib import computer_vision as cv
-from mylib.deploy_model import Yolo
+#from mylib.deploy_model import Yolo
 from api.views import *
 
 
@@ -34,6 +34,9 @@ def obj_detection_webcam(request):
     while video_capture.isOpened():  # 檢查 cam 是否開啟
         # record start time
         start_time = time()
+
+        # param = get_param() 
+        # print(param)
 
         # Capture frame-by-frame from the webcam
         ret, frame = video_capture.read()

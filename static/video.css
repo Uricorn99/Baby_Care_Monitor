@@ -105,7 +105,7 @@ body {
 }
   
   
-.loading {
+#loading {
   display: flex;
   position: absolute;
   top: 0;
@@ -133,7 +133,7 @@ body {
   }
 }
 
-.loading1 {
+#loading1 {
   display: flex;
   position: absolute;
   top: 0;
@@ -164,7 +164,7 @@ body {
 
 #panel {
     width: 300px;
-    background-color: black;
+    background-color: rgb(75, 75, 75);
     color: white;
     padding: 20px;
     position: absolute;
@@ -176,10 +176,93 @@ body {
     border-bottom-right-radius: 15px; /* Add rounded corners to the bottom left */
 }
 
-    /* Center-align text inside labels */
-h3 {
-    text-align: center;
+.function {
+  position: relative;
+  height: 15%;
+  /* background-color: rgb(220, 40, 40); */
+  border-radius: 15px;
+  margin-top: 23px; 
 }
+
+.func_title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 20px;
+  display: flex;
+  /* align-items: ; */
+  width: 70%;
+  height: auto;
+  padding: 10px;
+  /* background-color: rgb(65, 62, 253); */
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;
+  height:20px;
+  border-radius: 100%;
+  background: #ecf0f1;
+  position:relative;
+  z-index:3;
+  cursor: pointer;
+}
+
+.func_value {
+  margin-left: 25px;
+  width: 230px;
+  height: 35px;
+  -webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  position: relative;
+  background: #a4a5a4ab;
+}
+
+/* .func_check {
+  margin-left: 20px;
+  width: 250px;
+  height: 35px;
+  -webkit-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+  border-radius: 20px;
+  position: relative;
+
+} */
+
+input[type="range"] {
+  appearance: none;
+  position: relative;
+  outline: none;
+  margin: 7px 0px;
+  width: 85%;
+  color: #fff;
+  left: 50%;
+  margin-left: -43.5%;
+  background: #e74c3c;
+  text-align: center;
+  background: #d0d6d2d1;
+  background-position:center;
+  background-repeat:no-repeat;
+  -webkit-appearance:none;
+  border-radius: 25px;
+}
+
+/* input[type="range"]:before {
+  position: absolute;
+  bottom: -15%;
+  right: -8.5%;
+  margin-left: -10px;
+  content: attr(value);
+  display: block;
+  text-align: center;
+  font-size: 20px;
+} */
+
 
 
 
@@ -196,6 +279,7 @@ h3 {
     cursor: pointer;
     transition: background-color 0.3s;
     margin-left: 5px;
+    margin-top: 13px;
 }
 
 .toggle-button:checked {
@@ -218,10 +302,10 @@ h3 {
     left: 24px;
 }
 
-#acc, #dangertime, #warningtime, #toggleNotification {
+/* #acc, #dangertime, #warningtime, #toggleNotification {
     margin-top: 50px; 
     margin-bottom: 20px; 
-}
+} */
 
 .team{
   position: absolute; /* 使用绝对定位 */

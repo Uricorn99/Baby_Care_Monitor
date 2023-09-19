@@ -65,11 +65,11 @@ $(document).ready(function () {
 
     function updateVideoStream1() {
         const video = $('#video-stream');
-        const loadingElement = $('.loading'); // 获取loading元素   
+        const loadingElement = $('#loading'); // 获取loading元素   
         video.attr('src', '/mp4/video_feed/'); // 替换为你的第一个视频URL
         video.on('error', function (e) {
             console.error('Error loading video:', e);
-            loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
+            // loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
         });
     
         video.on('load', function () {
@@ -79,15 +79,15 @@ $(document).ready(function () {
     
     function updateVideoStream2() {
         const video = $('#webcam-video-stream');
-        const loadingElement = $('.loading'); // 获取loading元素
+        const loadingElement1 = $('#loading1'); // 获取loading元素
         video.attr('src', '/webcam/video/'); // 替换为你的第二个视频URL
         video.on('error', function (e) {
             console.error('Error loading video:', e);
-            loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
+            // loadingElement1.css('display', 'block'); // 显示loading，在视频加载错误时
         });
     
         video.on('load', function () {
-            loadingElement.css('display', 'none'); // 隐藏loading，当视频成功加载时
+            loadingElement1.css('display', 'none'); // 隐藏loading，当视频成功加载时
         });
     }
 });
