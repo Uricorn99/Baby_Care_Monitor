@@ -8,6 +8,7 @@ from django.http import StreamingHttpResponse
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from api.views import *
+from mylib.line import line_notify
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)
@@ -37,6 +38,7 @@ def obj_detection_webcam(request):
         start_time = time()
         # TODO: 從網頁端抓取使用者變數
         global_param = get_param()
+        print(global_param)
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])
@@ -54,7 +56,6 @@ def obj_detection_webcam(request):
         # Yolo Object Detection
         # TODO: 新增使用者自定義閥值，並取出查看        
         image_detection, detections = yolo.Object_Detect(frame_rgb, user_thresh)
-                
         # 偵測到物件時紀錄
         if anterior != len(detections):
             anterior = len(detections)
