@@ -63,9 +63,29 @@ class OpenCV_DNN:
 
 
 class Yolo:
-    def __init__(self, config_file: str, data_file: str, weights: str) -> None:
+    def __init__(self) -> None:
         """
-        YOLOv4 Darknet Object Detection
+        YOLOv4 Darknet
+        """
+        pass
+
+    @property
+    def Network_Width(self):
+        """
+        取得神經網路的輸入(寬)
+        """
+        return self.__network_width
+
+    @property
+    def Network_Height(self):
+        """
+        取得神經網路的輸入(高)
+        """
+        return self.__network_height
+
+    def Load_Net(self, config_file: str, data_file: str, weights: str):
+        """
+        載入YOLO模型
 
         Parameters:
 
@@ -92,20 +112,6 @@ class Yolo:
         # 取得神經網路的輸入維度(寬,高)
         self.__network_width = darknet.network_width(self.__network)
         self.__network_height = darknet.network_height(self.__network)
-
-    @property
-    def Network_Width(self):
-        """
-        取得神經網路的輸入(寬)
-        """
-        return self.__network_width
-
-    @property
-    def Network_Height(self):
-        """
-        取得神經網路的輸入(高)
-        """
-        return self.__network_height
 
     def Object_Detect(
         self, image_rgb: cv2.Mat, thresh: float = 0.5, show_coordinates: bool = True
