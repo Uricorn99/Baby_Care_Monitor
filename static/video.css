@@ -1,4 +1,8 @@
 body {
+  margin: 0;
+}
+
+.body_container{
   bottom: 0;
   font-family: 'Titillium Web', sans-serif;
   color: white;
@@ -6,11 +10,91 @@ body {
   margin: 0;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 64px;
   transform-origin: 0px 0px;
   overflow: hidden;
   background-color: #7295ad;
 }
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+a:hover {
+  text-decoration: none; 
+  color: orange; 
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+html {
+height: 100%;
+}
+
+
+.header {
+width: 100%;
+height: 60px;
+background: #17141d;
+opacity: 0.95;
+overflow: hidden;
+-webkit-box-shadow: #333 1px 3px 4px;
+-moz-box-shadow: #333 1px 3px 4px;
+box-shadow: #333 1px 3px 4px;
+}
+
+
+
+svg.line-top {
+width: 100%;
+background-color: #17141d;
+}
+svg.line-bottom {
+width: 100%;
+}
+.menu {
+width: 750px;
+margin: 0 auto;
+}
+ul {
+padding: 0;
+margin: 0;
+}
+
+ul li {
+margin: 0;
+padding: 5px 0 5px 0;
+width: 25%;
+height: 10px;
+text-align: center;
+text-transform: uppercase;
+text-decoration: none;
+color: white;
+cursor: pointer;
+display: inline-block;
+letter-spacing: 3.5px;
+transition: all 0.5s ease-out;
+}
+
+
+polygon {
+stroke-width: 2px;
+stroke: orange;
+fill: orange;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 @keyframes spin {
