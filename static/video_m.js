@@ -65,34 +65,21 @@ $(document).ready(function () {
     });
 
 
-    function updateVideoStream3() {
-        const video = $('#original-stream');
-        const loadingElement = $('#loading2'); // 获取loading元素   
-        video.attr('src', '/Mediapipe/original_feed/'); // 替换为你的第一个视频URL
-        video.on('error', function (e) {
-            console.error('Error loading video:', e);
-            // loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
-        });
-    
-        video.on('load', function () {
-            loadingElement.css('display', 'none'); // 隐藏loading，当视频成功加载时
-        });
+    function loadStreams() {
+        const originalStreamElement = $("#original-stream");
+        const mediapipeStreamElement = $("#mediapipe-stream");
+        const source = new EventSource("/mediapipe_feed/"); // 使用EventSource从服务器获取流
+
+        source.onmessage = function(event) {
+            const frames = event.data.split("||");
+            if (frames.length === 2) {
+                originalStreamElement.attr("src", "data:image/jpeg;base64," + frames[0]);
+                mediapipeStreamElement.attr("src", "data:image/jpeg;base64," + frames[1]);
+            }
+        };
     }
-    
-    function updateVideoStream4() {
-        const video = $('#mediapipe-stream');
-        const loadingElement = $('#loading3'); // 获取loading元素
-        video.attr('src', '/Mediapipe/mediapipe_feed/'); // 替换为你的第二个视频URL
-        video.on('error', function (e) {
-            console.error('Error loading video:', e);
-            //loadingElement.css('display', 'block'); // 显示loading，在视频加载错误时
-        });
-    
-        video.on('load', function () {
-            loadingElement.css('display', 'none'); // 隐藏loading，当视频成功加载时
-        });
-    }
-    updateVideoStream3(); 
-    // updateVideoStream4();
+
+    // 调用函数来加载两个流
+    loadStreams();
 });
 

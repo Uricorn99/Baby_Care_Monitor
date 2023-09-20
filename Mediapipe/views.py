@@ -12,61 +12,9 @@ from api.views import *
 cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
 # cascPath = "C:/Users/user/Desktop/facedetection/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
-log.basicConfig(filename='webcam.log', level=log.INFO)
-
-def face_detection_m(request):
-    video_capture = cv2.VideoCapture("C:/Users/jd200/Desktop/facedetection/2.mp4")
-    # video_capture = cv2.VideoCapture("C:/Users/user/Desktop/facedetection/1.mp4")
-    anterior = 0
-
-    frame_delay = 0.075  # Set the delay between frames (in seconds)
-
-    while True:
-        # param = get_param() 
-        # print(param)
-        # Capture frame-by-frame
-        ret, frame = video_capture.read()
-
-        if not ret:
-            break
-
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        faces = faceCascade.detectMultiScale(
-            gray,
-            scaleFactor=1.1,
-            minNeighbors=5,
-            minSize=(30, 30)
-        )
-
-        # Draw a rectangle around the faces
-        for (x, y, w, h) in faces:
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-        if anterior != len(faces):
-            anterior = len(faces)
-            log.info("faces: "+str(len(faces))+" at "+str(dt.datetime.now()))
-
-        # Convert the frame to JPEG format
-        _, buffer = cv2.imencode('.jpg', frame)
-        frame = buffer.tobytes()
-
-        yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
-        # Introduce a delay between frames
-        time.sleep(frame_delay)
-
-def original_feed(request):
-    return  StreamingHttpResponse(face_detection_m(request), content_type='multipart/x-mixed-replace; boundary=frame')
-
-def original_stream(request):
-    return render(request, 'mediapipe_video.html', {'video_stream_url': '/original_feed/'})
-
-
 
 # logger
-#log.basicConfig(filename="webcam.log", level=log.INFO)
+log.basicConfig(filename="webcam.log", level=log.INFO)
 
 
 def obj_detection_webcam_m(request):
@@ -122,13 +70,23 @@ def obj_detection_webcam_m(request):
             (0, 255, 0),
             2,
         )
+       
+        # 將原始影像轉換為 JPEG 格式
+        _, original_buffer = cv2.imencode(".jpg", frame)
+        original_frame = original_buffer.tobytes()
 
         # TODO: web影像大小需要調整
-        # Convert the frame to JPEG format
-        _, buffer = cv2.imencode(".jpg", image_detection)
-        frame = buffer.tobytes()
+        # 將經過 YOLO 處理的影像轉換為 JPEG 格式
+        _, detection_buffer = cv2.imencode(".jpg", image_detection)
+        detection_frame = detection_buffer.tobytes()
 
-        yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
+        yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + original_frame + b"\r\n", detection_frame)
+
+
+
+        # # 將原始影像和檢測結果一同串流
+        # yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + original_frame + b"\r\n")
+        # yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + detection_frame + b"\r\n")
 
         # Introduce a delay between frames
         # time.sleep(frame_delay)
@@ -145,3 +103,12 @@ def mediapipe_stream(request):
     return render(
         request, "mediapipe_video.html", {"video_stream_url": "/mediapipe_feed/"}
     )
+
+# def original_feed(request):
+#     return  StreamingHttpResponse(
+#         obj_detection_webcam_m(request),
+#         content_type='multipart/x-mixed-replace; boundary=frame'
+#         )
+
+# def original_stream(request):
+#     return render(request, 'mediapipe_video.html', {'video_stream_url': '/original_feed/'})
