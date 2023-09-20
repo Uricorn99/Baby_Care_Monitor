@@ -10,7 +10,7 @@ from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from api.views import *
 from mylib.line import line_notify
-from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
+# from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)
@@ -19,12 +19,12 @@ def obj_detection_webcam(request):
     # Vars
     yolo = Yolo()
     # Mediapipe 偵測器載入
-    MediapipeDetector_working = MediapipeDetector()
+    # MediapipeDetector_working = MediapipeDetector()
 
     # Parameters
-    cfg_file = "cfg/yolov4-cfg-train_ori.cfg"  # 模型配置
-    data_file = "data/pose_ori.data"  # 資料集路徑
-    weight_file = "weights/yolov4-cfg-train_ori_best.weights"  # 權重
+    cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
+    data_file = "data/pose.data"  # 資料集路徑
+    weight_file = "weights/yolov4-cfg-train_best.weights"  # 權重
 
     # 建立新的執行緒讓 Yolo 載入模型
     yolo_loadNet_thread = threading.Thread(
@@ -57,7 +57,7 @@ def obj_detection_webcam(request):
         start_time = time()
         # TODO: 從網頁端抓取使用者變數
         global_param = get_param()
-        print(global_param)
+        
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])
@@ -77,15 +77,16 @@ def obj_detection_webcam(request):
         # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # TODO: BradyFan 需確認要 Yolo 最終是用原圖疊加骨架或者空白背景骨架
-        detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
+        # detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
         # blank_frame = MediapipeDetector_working.draw_blank(detection_face, detection_pose) # 繪製空白背景骨架圖
-        overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
+        # overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
         
         # blank_frame_rgb = cv2.cvtColor(blank_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
-        overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        # overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
 
         # Yolo Object Detection
-        image_detection, detections = yolo.Object_Detect(overlay_frame_rgb, user_thresh)
+        image_detection, detections = yolo.Object_Detect(frame_rgb, user_thresh)
 
         # 偵測到物件時紀錄
         if anterior != len(detections):

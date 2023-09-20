@@ -6,12 +6,12 @@ import time
 import logging as log
 import datetime as dt
 from mylib import computer_vision as cv
-#from mylib.deploy_model import Yolo
+from mylib.deploy_model import Yolo
 from api.views import *
 
-cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
+# cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
 # cascPath = "C:/Users/user/Desktop/facedetection/haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(cascPath)
+# faceCascade = cv2.CascadeClassifier(cascPath)
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)

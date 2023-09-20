@@ -8,21 +8,20 @@ import numpy as np
 import time  # Import the time module
 from api.views import *
 
-cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
-#cascPath = "C:/Users/user/Desktop/facedetection/haarcascade_frontalface_default.xml"
+# cascPath = "C:/Users/jd200/Desktop/facedetection/haarcascade_frontalface_default.xml"
+cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection(request):
-    video_capture = cv2.VideoCapture("C:/Users/jd200/Desktop/facedetection/1.mp4")
-    #video_capture = cv2.VideoCapture("C:/Users/user/Desktop/facedetection/1.mp4")
+    video_capture = cv2.VideoCapture("1.mp4")
     anterior = 0
 
     frame_delay = 0.075  # Set the delay between frames (in seconds)
 
     while True:
         param = get_param() 
-        print(param)
+        
         # Capture frame-by-frame
         ret, frame = video_capture.read()
 
