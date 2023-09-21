@@ -5,8 +5,7 @@ global_param = {
         "acc": 0.5,
         "dangertime": 30,
         "warningtime": 10,
-        "toggle_notification": True,
-        
+        "toggle_notification": 'true',        
 }
 
 def get_param():

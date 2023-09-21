@@ -15,7 +15,8 @@ class Notify:
         token (str): line通知令牌  
         """
         self.q = queue.Queue()
-        self.q1 = queue.Queue()
+        # self.q1 = queue.Queue()
+        self.send_time = None
         self.send = 'No'
         self.old_result = None
         self.first_alarm = None
@@ -26,7 +27,7 @@ class Notify:
             task = self.q.get()
 
             url = "https://notify-api.line.me/api/notify"
-            token = "DiLXmcVgZzBv4lEg7jYRCDxksSK4JPl6EZbNweXFrqi"
+            token = "HYqb8GwjgljZ5fU2uxMhnC8zewF6TNJci8Z65GPDybv"
             headers = {'Authorization': 'Bearer ' + token}
 
             try:
@@ -35,25 +36,25 @@ class Notify:
                     print(f'Working')
                     # print(f'響應內容：{respon.text}')
                     # print(f'{respon} is finished')
-                    send_time = time()
-                    self.q1.put(send_time)
+                    # self.send_time = time()
+                    # self.q1.put(send_time)
             except Exception as e:
                 print("An error occurred:", str(e))
             finally:
                 print('Send_Done')
                 self.q.task_done()
                 
-    def get_send_time(self):
-        try:
-            if self.send == 'Yes':
-                return self.q1.get()
-            else:
-                return None
-        except Exception as e:
-                print("An error occurred:", str(e))
-        return None
+    # def get_send_time(self):
+    #     try:
+    #         if self.send == 'Yes':
+    #             return self.q1.get()
+    #         else:
+    #             return None
+    #     except Exception as e:
+    #             print("An error occurred:", str(e))
+    #     return None
         
-    def line_notify(self, detections, kt, si, tn, send_time):
+    def line_notify(self, detections, kt, si, tn):
         if tn == "true":
             try:
                 test_result = detections[0][0]
@@ -63,12 +64,12 @@ class Notify:
                     if test_result == self.old_result:
                         if now_alarm - self.first_alarm > kt:
                             # print('超過持續時間了')
-                            # print(send_time)
+                            # print(self.send_time)
                             # print(si)
-                            # if send_time is not None:
-                            #     print(now_alarm - send_time)
-                            if send_time is None:
-                                # print('發第一次通知')
+                            # if self.send_time is not None:
+                            #     print(now_alarm - self.send_time)
+                            if self.send_time is None:
+                                print('發第一次通知')
                                 now = datetime.datetime.now()
                                 formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")
                                 self.data = {
@@ -77,8 +78,9 @@ class Notify:
                                             f'現在時間:{formatted_time}'                                    
                                 }
                                 self.send = 'Yes'
-                            elif now_alarm - send_time > si:
-                                # print('第n次通知')
+                                self.send_time = time()
+                            elif now_alarm - self.send_time > si:
+                                print('第n次通知')
                                 now = datetime.datetime.now()
                                 formatted_time = now.strftime("%Y-%m-%d %H:%M:%S")                           
                                 self.data = {
@@ -87,6 +89,7 @@ class Notify:
                                             f'現在時間:{formatted_time}'                                    
                                 }
                                 self.send = 'Yes'
+                                self.send_time = time()
                         else:
                             print('翻過去了，持續時間還沒到')
                             self.old_result = test_result

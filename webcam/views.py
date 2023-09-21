@@ -21,9 +21,9 @@ def obj_detection_webcam(request):
     # Mediapipe 偵測器載入
     MediapipeDetector_working = MediapipeDetector()
     # Parameters
-    cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
-    data_file = "data/pose.data"  # 資料集路徑
-    weight_file = "weights/yolov4-cfg-train_best.weights"  # 權重
+    cfg_file = "cfg/yolov4-cfg-train_ori.cfg"  # 模型配置
+    data_file = "data/pose_ori.data"  # 資料集路徑
+    weight_file = "weights/yolov4-cfg-train_ori_best.weights"  # 權重
 
     # 建立新的執行緒讓 Yolo 載入模型
     yolo_loadNet_thread = threading.Thread(
@@ -48,7 +48,7 @@ def obj_detection_webcam(request):
         
     # Open a connection to the default webcam (usually index 0)
     # video_capture = cv2.VideoCapture(0) 
-    video_capture, video_writer, video_height, video_width = cv.cam_init("2023-09-20.mp4")
+    video_capture, video_writer, video_height, video_width = cv.cam_init("Demo.mp4")
     anterior = 0
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
@@ -61,10 +61,10 @@ def obj_detection_webcam(request):
         start_time = time()
         # TODO: 從網頁端抓取使用者變數
         global_param = get_param()
-        #print(global_param)
+        print(global_param)
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
-        si = float(global_param["warningtime"])
+        si = float(global_param["warningtime"])*60
         tn = global_param["toggle_notification"]
 
         # Capture frame-by-frame from the webcam
@@ -117,13 +117,13 @@ def obj_detection_webcam(request):
         imageFile = {'imageFile' : frame}   # 設定圖片資訊
 
         # TODO: Line Notify
-        task.line_notify(detections, kt, si, tn, send_time)
+        task.line_notify(detections, kt, si, tn)
         if task.data is not None:
             if old_data is None or task.data != old_data:
                 old_data = task.data
                 task.q.put((task.data, imageFile), block=True)
-                send_time = task.get_send_time()
-        print(task.old_result, task.first_alarm,  send_time)
+                # send_time = task.get_send_time()
+        print(task.old_result, task.first_alarm,  task.send_time)
 
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
