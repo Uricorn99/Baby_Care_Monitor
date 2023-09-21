@@ -107,7 +107,7 @@ fill: orange;
 }
 
 /* 将视频设置为背景 */
-#webcam-video-stream {
+/* #webcam-video-stream {
     min-width: 100%;
     min-height: 100%;
     width: auto;
@@ -116,10 +116,16 @@ fill: orange;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+} */
+#webcam-video-stream {
+  width: 900px; 
+  height: 640px; 
+  object-fit: fill;
+  border-radius: 20px; 
+  box-shadow: 0 0 10px rgba(#7295ad, 0.5);
 }
 
-/* 将视频设置为背景 */
-#video-stream {
+/* #video-stream {
   min-width: 100%;
   min-height: 100%;
   width: auto;
@@ -128,6 +134,13 @@ fill: orange;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+} */
+#video-stream {
+  width: 900px; 
+  height: 640px; 
+  object-fit: fill;
+  border-radius: 20px; 
+  box-shadow: 0 0 10px rgba(#7295ad, 0.5);
 }
   
 #body1 {
@@ -182,6 +195,16 @@ fill: orange;
   &.selfie {
     transform: scale(-1, 1);
   }
+}
+.input_video {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  width: 100%;
+  height: calc(100% - 20px); /* 高度为容器高度减去顶部间距 */
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .input_image {
