@@ -10,7 +10,7 @@ from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from api.views import *
 from mylib.line import line_notify
-# from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
+from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)
@@ -19,7 +19,7 @@ def obj_detection_webcam(request):
     # Vars
     yolo = Yolo()
     # Mediapipe 偵測器載入
-    # MediapipeDetector_working = MediapipeDetector()
+    MediapipeDetector_working = MediapipeDetector()
 
     # Parameters
     cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
@@ -46,8 +46,6 @@ def obj_detection_webcam(request):
     send_time = None
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
-    
-    # frame_delay = 0.075  # Set the delay between frames (in seconds)
 
     # 等候執行緒完成
     yolo_loadNet_thread.join()
@@ -63,9 +61,6 @@ def obj_detection_webcam(request):
         si = float(global_param["warningtime"])
         tn = global_param["toggle_notification"]
 
-        # param = get_param() 
-        # print(param)
-
         # Capture frame-by-frame from the webcam
         ret, frame = video_capture.read()
 
@@ -77,16 +72,16 @@ def obj_detection_webcam(request):
         # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # TODO: BradyFan 需確認要 Yolo 最終是用原圖疊加骨架或者空白背景骨架
-        # detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
+        detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
         # blank_frame = MediapipeDetector_working.draw_blank(detection_face, detection_pose) # 繪製空白背景骨架圖
-        # overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
+        overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
         
         # blank_frame_rgb = cv2.cvtColor(blank_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
-        # overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
 
         # Yolo Object Detection
-        image_detection, detections = yolo.Object_Detect(frame_rgb, user_thresh)
+        image_detection, detections = yolo.Object_Detect(overlay_frame_rgb, user_thresh)
 
         # 偵測到物件時紀錄
         if anterior != len(detections):
@@ -116,8 +111,8 @@ def obj_detection_webcam(request):
         imageFile = {'imageFile' : frame}   # 設定圖片資訊
 
         # TODO: Line Notify
-        old_result, first_alarm,  send_time = line_notify(tn,detections,kt,imageFile,si) 
-        print(old_result, first_alarm,  send_time)
+        # old_result, first_alarm,  send_time = line_notify(tn,detections,kt,imageFile,si) 
+        # print(old_result, first_alarm,  send_time)
 
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
