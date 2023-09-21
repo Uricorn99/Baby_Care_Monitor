@@ -14,7 +14,7 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 log.basicConfig(filename='webcam.log', level=log.INFO)
 
 def face_detection(request):
-    video_capture = cv2.VideoCapture("1.mp4")
+    video_capture = cv2.VideoCapture("Demo.mp4")
     anterior = 0
 
     frame_delay = 0.075  # Set the delay between frames (in seconds)
