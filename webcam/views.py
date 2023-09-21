@@ -9,8 +9,8 @@ from django.http import StreamingHttpResponse
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from api.views import *
-from mylib.line import line_notify
-from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
+from mylib.line import Notify
+#from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
 
 # logger
 log.basicConfig(filename="webcam.log", level=log.INFO)
@@ -19,8 +19,7 @@ def obj_detection_webcam(request):
     # Vars
     yolo = Yolo()
     # Mediapipe 偵測器載入
-    MediapipeDetector_working = MediapipeDetector()
-
+    #MediapipeDetector_working = MediapipeDetector()
     # Parameters
     cfg_file = "cfg/yolov4-cfg-train_ori.cfg"  # 模型配置
     data_file = "data/pose_ori.data"  # 資料集路徑
@@ -34,16 +33,23 @@ def obj_detection_webcam(request):
     yolo_loadNet_thread.setDaemon(True)
     # 執行緒開始運行
     yolo_loadNet_thread.start()
-
-    # Open a connection to the default webcam (usually index 0)
-    # video_capture = cv2.VideoCapture(0)
-    video_capture, video_writer, video_height, video_width = cv.cam_init(0)
-    anterior = 0
-
+    
+    # 建構Line notify副執行緒
+    task = Notify()
     # global param for line notify
-    old_result = None
-    first_alarm = None
+    task.old_result = None
+    task.first_alarm = None
+    task.data = None
     send_time = None
+    imageFile = None
+    old_data = None
+    send_thread = threading.Thread(target = task.send_work, args=(task.data, imageFile), daemon=True)
+    send_thread.start()
+        
+    # Open a connection to the default webcam (usually index 0)
+    # video_capture = cv2.VideoCapture(0) 
+    video_capture, video_writer, video_height, video_width = cv.cam_init("2023-09-20.mp4")
+    anterior = 0
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
     
@@ -57,7 +63,7 @@ def obj_detection_webcam(request):
         start_time = time()
         # TODO: 從網頁端抓取使用者變數
         global_param = get_param()
-        print(global_param)
+        #print(global_param)
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])
@@ -74,12 +80,12 @@ def obj_detection_webcam(request):
         # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
         # TODO: BradyFan 需確認要 Yolo 最終是用原圖疊加骨架或者空白背景骨架
-        detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
+        #detection_face, detection_pose = MediapipeDetector_working.run_all(frame) # 透過模型偵測 frame_rgb 的臉跟骨架
         # blank_frame = MediapipeDetector_working.draw_blank(detection_face, detection_pose) # 繪製空白背景骨架圖
-        overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
+        #overlay_frame = MediapipeDetector_working.draw_overlay(detection_face, detection_pose) # 原圖疊加骨架圖
         
         # blank_frame_rgb = cv2.cvtColor(blank_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
-        overlay_frame_rgb = cv2.cvtColor(overlay_frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
+        overlay_frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # 轉換色彩空間 BGR -> RGB
 
         # Yolo Object Detection
         image_detection, detections = yolo.Object_Detect(overlay_frame_rgb, user_thresh)
@@ -112,8 +118,13 @@ def obj_detection_webcam(request):
         imageFile = {'imageFile' : frame}   # 設定圖片資訊
 
         # TODO: Line Notify
-        old_result, first_alarm,  send_time = line_notify(tn,detections,kt,imageFile,si) 
-        print(old_result, first_alarm,  send_time)
+        task.line_notify(detections, kt, si, tn, send_time)
+        if task.data is not None:
+            if old_data is None or task.data != old_data:
+                old_data = task.data
+                task.q.put((task.data, imageFile), block=True)
+                send_time = task.get_send_time()
+        print(task.old_result, task.first_alarm,  send_time)
 
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
