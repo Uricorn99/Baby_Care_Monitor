@@ -9,7 +9,7 @@ from django.http import StreamingHttpResponse
 from mylib import computer_vision as cv
 from mylib.deploy_model import Yolo
 from api.views import *
-from mylib.line import line_notify
+from mylib.line import Notify
 from mylib.Mediapipe import MediapipeDetector # 導入 Mediapipe Detector
 
 # logger
@@ -20,7 +20,6 @@ def obj_detection_webcam(request):
     yolo = Yolo()
     # Mediapipe 偵測器載入
     MediapipeDetector_working = MediapipeDetector()
-
     # Parameters
     cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
     data_file = "data/pose.data"  # 資料集路徑
@@ -34,16 +33,23 @@ def obj_detection_webcam(request):
     yolo_loadNet_thread.setDaemon(True)
     # 執行緒開始運行
     yolo_loadNet_thread.start()
-
-    # Open a connection to the default webcam (usually index 0)
-    # video_capture = cv2.VideoCapture(0)
-    video_capture, video_writer, video_height, video_width = cv.cam_init(0)
-    anterior = 0
-
+    
+    # 建構Line notify副執行緒
+    task = Notify()
     # global param for line notify
-    old_result = None
-    first_alarm = None
+    task.old_result = None
+    task.first_alarm = None
+    task.data = None
     send_time = None
+    imageFile = None
+    old_data = None
+    send_thread = threading.Thread(target = task.send_work, args=(task.data, imageFile), daemon=True)
+    send_thread.start()
+        
+    # Open a connection to the default webcam (usually index 0)
+    # video_capture = cv2.VideoCapture(0) 
+    video_capture, video_writer, video_height, video_width = cv.cam_init("2023-09-20.mp4")
+    anterior = 0
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
 
@@ -55,7 +61,7 @@ def obj_detection_webcam(request):
         start_time = time()
         # TODO: 從網頁端抓取使用者變數
         global_param = get_param()
-        
+        #print(global_param)
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])
@@ -111,8 +117,13 @@ def obj_detection_webcam(request):
         imageFile = {'imageFile' : frame}   # 設定圖片資訊
 
         # TODO: Line Notify
-        # old_result, first_alarm,  send_time = line_notify(tn,detections,kt,imageFile,si) 
-        # print(old_result, first_alarm,  send_time)
+        task.line_notify(detections, kt, si, tn, send_time)
+        if task.data is not None:
+            if old_data is None or task.data != old_data:
+                old_data = task.data
+                task.q.put((task.data, imageFile), block=True)
+                send_time = task.get_send_time()
+        print(task.old_result, task.first_alarm,  send_time)
 
         yield (b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame + b"\r\n")
 
