@@ -5,7 +5,8 @@ global_param = {
         "acc": 0.5,
         "dangertime": 30,
         "warningtime": 10,
-        "toggle_notification": 'true',        
+        "toggle_notification": 'true',
+        "recording": 'false'        
 }
 
 def get_param():
@@ -18,6 +19,7 @@ def get_data_from_request(request):
     dangertime = request.GET.get('dangertime')
     warningtime = request.GET.get('warningtime')
     toggle_notification = request.GET.get('toggle_notification')
+    recording = request.GET.get('recording')
     
 
 
@@ -25,6 +27,8 @@ def get_data_from_request(request):
     global_param['dangertime']=dangertime
     global_param['warningtime']=warningtime
     global_param['toggle_notification']=toggle_notification
+    global_param['recording']=recording
+
 
 
     # 返回 JSON 响应

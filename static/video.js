@@ -14,6 +14,7 @@ $(document).ready(function () {
         let dangertimeValue = $('#dangertime').val();
         let warningtimeValue = $('#warningtime').val();
         let toggleNotificationValue = $('#toggleNotification').is(':checked');
+        let recordingValue = $('#recording').is(':checked');
         
 
         // 发送到后端的逻辑
@@ -25,6 +26,7 @@ $(document).ready(function () {
                 dangertime: dangertimeValue,
                 warningtime: warningtimeValue,
                 toggle_notification: toggleNotificationValue,
+                recording: recordingValue,
                 
             }
         }).then((response) => {
@@ -43,7 +45,7 @@ $(document).ready(function () {
     });
 
     // 绑定事件调用 sendParamBackEnd 函数
-    $('#acc, #dangertime, #warningtime, #toggleNotification').on('change', function () {
+    $('#acc, #dangertime, #warningtime, #toggleNotification, #recording').on('change', function () {
      
         sendParamBackEnd();
     });

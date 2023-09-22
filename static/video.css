@@ -409,6 +409,27 @@ input[type="range"] {
     left: 24px;
 }
 
+#recording {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 50px;
+  height: 50px;
+  background: url('rec.png')no-repeat top center;
+  margin-top: 9px;
+}
+
+#recording:checked {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 50px;
+  height: 50px;
+  background: url('stop.png')no-repeat top center;
+  margin-top: 9px;
+}
+
+
 /* #acc, #dangertime, #warningtime, #toggleNotification {
     margin-top: 50px; 
     margin-bottom: 20px; 
