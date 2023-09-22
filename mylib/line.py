@@ -5,15 +5,7 @@ import threading
 import queue
 
 class Notify:
-    def __init__(self):
-        """
-        Line Notify\n
-        detections (list): 物件偵測回傳的list\n
-        kt (float): 姿勢維持多久觸發警報\n
-        imageFile (dict): 危險姿勢截圖\n
-        si (float): 警報間隔
-        token (str): line通知令牌  
-        """
+    def __init__(self):        
         self.q = queue.Queue()
         # self.q1 = queue.Queue()
         self.send_time = None
@@ -27,7 +19,7 @@ class Notify:
             task = self.q.get()
 
             url = "https://notify-api.line.me/api/notify"
-            token = "HYqb8GwjgljZ5fU2uxMhnC8zewF6TNJci8Z65GPDybv"
+            token = "DiLXmcVgZzBv4lEg7jYRCDxksSK4JPl6EZbNweXFrqi"
             headers = {'Authorization': 'Bearer ' + token}
 
             try:
@@ -55,6 +47,13 @@ class Notify:
     #     return None
         
     def line_notify(self, detections, kt, si, tn):
+        """
+        Line Notify\n
+        detections (list): 物件偵測回傳的list\n
+        kt (float): 姿勢維持多久觸發警報\n
+        si (float): 警報間隔\n
+        tn (str): 通知是否開啟
+        """
         if tn == "true":
             try:
                 test_result = detections[0][0]
@@ -77,7 +76,7 @@ class Notify:
                                             f'姿勢維持時間:{round(now_alarm - self.first_alarm)}秒鐘\n'
                                             f'現在時間:{formatted_time}'                                    
                                 }
-                                self.send = 'Yes'
+                                # self.send = 'Yes'
                                 self.send_time = time()
                             elif now_alarm - self.send_time > si:
                                 print('第n次通知')
@@ -88,7 +87,7 @@ class Notify:
                                             f'姿勢維持時間:{round(now_alarm - self.first_alarm)}秒鐘\n'
                                             f'現在時間:{formatted_time}'                                    
                                 }
-                                self.send = 'Yes'
+                                # self.send = 'Yes'
                                 self.send_time = time()
                         else:
                             print('翻過去了，持續時間還沒到')

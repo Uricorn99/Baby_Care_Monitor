@@ -40,7 +40,6 @@ def obj_detection_webcam(request):
     task.old_result = None
     task.first_alarm = None
     task.data = None
-    send_time = None
     imageFile = None
     old_data = None
     send_thread = threading.Thread(target = task.send_work, args=(task.data, imageFile), daemon=True)
@@ -48,7 +47,7 @@ def obj_detection_webcam(request):
         
     # Open a connection to the default webcam (usually index 0)
     # video_capture = cv2.VideoCapture(0) 
-    video_capture, video_writer, video_height, video_width = cv.cam_init("Demo.mp4")
+    video_capture, video_writer, video_height, video_width = cv.cam_init(0)
     anterior = 0
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
