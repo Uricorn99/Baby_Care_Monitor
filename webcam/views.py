@@ -21,9 +21,9 @@ def obj_detection_webcam(request):
     # Mediapipe 偵測器載入
     MediapipeDetector_working = MediapipeDetector()
     # Parameters
-    cfg_file = "cfg/yolov4-cfg-train_ori.cfg"  # 模型配置
-    data_file = "data/pose_ori.data"  # 資料集路徑
-    weight_file = "weights/yolov4-cfg-train_ori_best.weights"  # 權重
+    cfg_file = "cfg/yolov4-cfg-train.cfg"  # 模型配置
+    data_file = "data/pose.data"  # 資料集路徑
+    weight_file = "weights/yolov4-cfg-train_best.weights"  # 權重
 
     # 建立新的執行緒讓 Yolo 載入模型
     yolo_loadNet_thread = threading.Thread(

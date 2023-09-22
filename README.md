@@ -44,10 +44,8 @@
   ```
 
 ## Usage
-1. 準備YOLO需要的檔案，下載解壓縮放在專案內
-   - [cfg](https://drive.google.com/file/d/1TVv__CZvOPY8VBLIb7eCy5WCefpty5N6/view?usp=drive_link): 模型參數 (ex: .cfg)
-   - [data](https://drive.google.com/file/d/1-FA0MlWu5gCMVYkGCFd-pKGCdrCZB1m8/view?usp=drive_link), [name](https://drive.google.com/file/d/1-AvngQVa06aCxEgs9tP0JvQ-qT6uZpzF/view?usp=drive_link): 訓練時的資料集檔案 (ex: .data & .name)
-   - [weights](https://drive.google.com/file/d/1d8KwqC6-Fz1MZbxDRH_kDJQOipFIMCgT/view?usp=sharing): 訓練後的模型權重檔案 (ex: .weights)
+1. 準備YOLO需要的檔案，建立一個目錄 \weights 並下載解壓縮放在目錄內 
+   - [weights](https://drive.google.com/drive/folders/1RxjkyTuoJ6ESHTZqOCaTNsD5cBGrgN4s?usp=drive_link): 訓練後的模型權重檔案 (ex: .weights)
 
 2. Run Django server
    ```bash
