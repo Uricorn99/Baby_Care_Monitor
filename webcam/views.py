@@ -40,15 +40,15 @@ def obj_detection_webcam(request):
     task.old_result = None
     task.first_alarm = None
     task.data = None
-    send_time = None
     imageFile = None
-    old_data = None
+    old_send_time = None
     send_thread = threading.Thread(target = task.send_work, args=(task.data, imageFile), daemon=True)
     send_thread.start()
         
     # Open a connection to the default webcam (usually index 0)
-    # video_capture = cv2.VideoCapture(0) 
+    # video_capture = cv2.VideoCapture(0)
     video_capture, video_writer, video_height, video_width = cv.cam_init("Demo.mp4")
+    # video_capture, video_writer, video_height, video_width = cv.cam_init(0, True)
     anterior = 0
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
@@ -59,9 +59,9 @@ def obj_detection_webcam(request):
     while video_capture.isOpened():  # 檢查 cam 是否開啟
         # record start time
         start_time = time()
-        # TODO: 從網頁端抓取使用者變數
+        # 從網頁端抓取使用者變數
         global_param = get_param()
-        print(global_param)
+        # print(global_param)
         user_thresh = float(global_param["acc"])
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])*60
@@ -73,7 +73,7 @@ def obj_detection_webcam(request):
         if not ret:
             
             break
-
+        # video_writer.write(frame)
         # 轉換色彩空間 BGR -> RGB
         # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -116,11 +116,11 @@ def obj_detection_webcam(request):
         frame = buffer.tobytes()
         imageFile = {'imageFile' : frame}   # 設定圖片資訊
 
-        # TODO: Line Notify
+        # Line Notify
         task.line_notify(detections, kt, si, tn)
-        if task.data is not None:
-            if old_data is None or task.data != old_data:
-                old_data = task.data
+        if task.send_time:
+            if old_send_time is None or task.send_time != old_send_time:
+                old_send_time = task.send_time
                 task.q.put((task.data, imageFile), block=True)
                 # send_time = task.get_send_time()
         print(task.old_result, task.first_alarm,  task.send_time)
