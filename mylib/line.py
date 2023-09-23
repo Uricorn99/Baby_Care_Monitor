@@ -5,21 +5,21 @@ import threading
 import queue
 
 class Notify:
-    def __init__(self):        
+    def __init__(self):
         self.q = queue.Queue()
-        # self.q1 = queue.Queue()
         self.send_time = None
-        self.send = 'No'
         self.old_result = None
         self.first_alarm = None
         self.data = None
+        # self.send = 'No'
+        # self.q1 = queue.Queue()
     # 發通知
     def send_work(self, data, imageFile):
         while True:
             task = self.q.get()
 
             url = "https://notify-api.line.me/api/notify"
-            token = "DiLXmcVgZzBv4lEg7jYRCDxksSK4JPl6EZbNweXFrqi"
+            token = "HYqb8GwjgljZ5fU2uxMhnC8zewF6TNJci8Z65GPDybv"
             headers = {'Authorization': 'Bearer ' + token}
 
             try:
@@ -35,7 +35,6 @@ class Notify:
             finally:
                 print('Send_Done')
                 self.q.task_done()
-                
     # def get_send_time(self):
     #     try:
     #         if self.send == 'Yes':
@@ -92,28 +91,28 @@ class Notify:
                         else:
                             print('翻過去了，持續時間還沒到')
                             self.old_result = test_result
-                            self.send = 'No'
+                            # self.send = 'No'
                             self.data = None
                     else:
                         print('剛翻過去，還不用通知')
                         self.old_result = test_result
                         self.first_alarm = now_time
-                        self.send = 'No'
+                        # self.send = 'No'
                         self.data = None
                 else:
                     self.old_result = test_result
-                    self.send = 'No'
+                    # self.send = 'No'
                     self.data = None
                     print("Your baby is fine")
             except:
                 self.old_result = None
                 self.first_alarm = None
-                self.send = 'No'
+                # self.send = 'No'
                 self.data = None
                 print("Baby probably not here")
         else:
             print("Notifications are not turned on")
             self.old_result = None
             self.first_alarm = None
-            self.send = 'No'
+            # self.send = 'No'
             self.data = None
