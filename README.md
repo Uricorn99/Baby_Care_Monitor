@@ -62,15 +62,24 @@
 
 ## YOLO (You Only Look Once)
 
-![YOLO](https://miro.medium.com/v2/resize:fit:2792/format:webp/1*Co8xD0IWPaBiWr-Xfu38dw.jpeg) 
+![YOLO](https://miro.medium.com/v2/resize:fit:2792/format:webp/1*Co8xD0IWPaBiWr-Xfu38dw.jpeg)
+
+<br>
+
 :link:[YOLOv4 (608x608 batch=1 – 62 FPS on V100) object detection (model is trained on MSCOCO dataset)](https://alexeyab84.medium.com/yolov4-the-most-accurate-real-time-neural-network-on-ms-coco-dataset-73adfd3602fe)
 
 ## MediaPipe
 
-![MediaPipe-Face](https://developers.google.com/static/mediapipe/images/solutions/examples/face_landmarker_720.png) 
+![MediaPipe-Face](https://developers.google.com/static/mediapipe/images/solutions/examples/face_landmarker_720.png)
+
+<br>
+
 :link:[Face Landmark Detection](https://mediapipe-studio.webapps.google.com/demo/face_landmarker)
 
-![MediaPipe-Pose](https://developers.google.com/static/mediapipe/images/solutions/examples/pose_detector_720.png) 
+![MediaPipe-Pose](https://developers.google.com/static/mediapipe/images/solutions/examples/pose_detector_720.png)
+
+<br>
+
 :link:[Pose Landmark Detection](https://mediapipe-studio.webapps.google.com/demo/pose_landmarker)
 
 ## Usage
