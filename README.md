@@ -5,6 +5,10 @@
 - Topic 1: 透過 AI 技術辨識嬰兒姿態
 - Topic 2: 結合 Line 應用發出通知
 
+## Contribute
+
+[![GitHub](https://badgen.net/badge/icon/YunTW?icon=github&label)](https://github.com/YunTW) [![GitHub](https://badgen.net/badge/icon/BradyFan?icon=github&label)](https://github.com/BradyFan) [![GitHub](https://badgen.net/badge/icon/BrianLiu?icon=github&label)](https://github.com/brianvan555) [![GitHub](https://badgen.net/badge/icon/Uricorn?icon=github&label)](https://github.com/Uricorn99) [![GitHub](https://badgen.net/badge/icon/IvanHsiao?icon=github&label)](https://github.com/IvanHsiao29) [![GitHub](https://badgen.net/badge/icon/Jelly?icon=github&label)](https://github.com/Jelley123)
+
 ## Requirement
 
 - Python 3.10.13
@@ -79,7 +83,3 @@
    ```
 
 3. Web UI![Web UI](./img/WebUI.png)
-
-## Contribute
-
-[![GitHub](https://badgen.net/badge/icon/YunTW?icon=github&label)](https://github.com/YunTW) [![GitHub](https://badgen.net/badge/icon/BradyFan?icon=github&label)](https://github.com/BradyFan) [![GitHub](https://badgen.net/badge/icon/BrianLiu?icon=github&label)](https://github.com/brianvan555) [![GitHub](https://badgen.net/badge/icon/Uricorn?icon=github&label)](https://github.com/Uricorn99) [![GitHub](https://badgen.net/badge/icon/IvanHsiao?icon=github&label)](https://github.com/IvanHsiao29) [![GitHub](https://badgen.net/badge/icon/Jelly?icon=github&label)](https://github.com/Jelley123)
