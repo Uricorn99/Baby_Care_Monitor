@@ -5,6 +5,17 @@
 - Topic 1: 透過 AI 技術辨識嬰兒姿態
 - Topic 2: 結合 Line 應用發出通知
 
+## Table of Contents
+
+- [Baby Care Monitor](#baby-care-monitor)
+  - [Table of Contents](#table-of-contents)
+  - [Contribute](#contribute)
+  - [Requirement](#requirement)
+  - [Installation](#installation)
+  - [YOLO](#yolo)
+  - [MediaPipe](#mediapipe)
+  - [Usage](#usage)
+
 ## Contribute
 
 [![GitHub](https://badgen.net/badge/icon/YunTW?icon=github&label)](https://github.com/YunTW) [![GitHub](https://badgen.net/badge/icon/BradyFan?icon=github&label)](https://github.com/BradyFan) [![GitHub](https://badgen.net/badge/icon/BrianLiu?icon=github&label)](https://github.com/brianvan555) [![GitHub](https://badgen.net/badge/icon/Uricorn?icon=github&label)](https://github.com/Uricorn99) [![GitHub](https://badgen.net/badge/icon/IvanHsiao?icon=github&label)](https://github.com/IvanHsiao29) [![GitHub](https://badgen.net/badge/icon/Jelly?icon=github&label)](https://github.com/Jelley123)
@@ -15,7 +26,7 @@
 - CUDA Toolkit 11.0.3
 - cuDNN v8.0.5
 
-## Install
+## Installation
 
 - Numpy
   
@@ -60,7 +71,7 @@
   pip install numpy opencv-python opencv-contrib-python Django mediapipe torch==2.0.1 torchvision==0.15.2
   ```
 
-## YOLO (You Only Look Once)
+## YOLO
 
 ![YOLO](https://miro.medium.com/v2/resize:fit:2792/format:webp/1*Co8xD0IWPaBiWr-Xfu38dw.jpeg)
 
