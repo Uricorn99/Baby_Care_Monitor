@@ -15,6 +15,19 @@ body {
   overflow: hidden;
   background-color: #7295ad;
 }
+.home_body_container{
+  bottom: 0;
+  font-family: 'Titillium Web', sans-serif;
+  color: white;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 64px;
+  transform-origin: 0px 0px;
+  overflow: hidden;
+  background-color: #ccc;
+}
 
 
 a {
@@ -440,4 +453,68 @@ input[type="range"] {
   bottom: 0; /* 位于底部 */
   right: 0; /* 位于右侧 */
   font-size: 30px;
+}
+
+
+/* * { 
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box; 
+} */
+
+table {
+  border-collapse: separate;
+  background: #fff;
+  border-radius: 5px;
+  margin: 50px auto;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+thead {
+  border-radius: 5px;
+}
+
+thead th {
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 20px;
+  background-image: linear-gradient(#646f7f, #4a5564);
+  border-top: 1px solid #858d99;
+  
+  &:first-child {
+    border-top-left-radius: 5px; 
+  }
+
+  &:last-child {
+    border-top-right-radius: 5px; 
+  }
+}
+
+tbody tr td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #5f6062;
+  font-size: 13px;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:nth-child(2n) {
+  background: #f0f3f5;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+  
+  &:first-child {
+    border-bottom-left-radius: 5px;
+  }
+  
+  &:last-child {
+    border-bottom-right-radius: 5px;
+  }
 }

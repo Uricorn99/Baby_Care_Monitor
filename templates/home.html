@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Baby Webcam</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'video.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav>
+    <div class="header">
+        <div class="menu">
+         <svg class="line-top" width="750" height="15" viewbox="0,0 1000,20">
+          <line
+           class="line-dash"
+           x1="0"
+           y1="15"
+           x2="1000"
+           y2="15"
+          />
+         </svg>
+         <ul>
+            <li><a href="http://127.0.0.1:8000/" style = "color:orange; font-size:18px">Home</a></li><li><a href="http://127.0.0.1:8000/mp4">Video</a></li><li><a href="http://127.0.0.1:8000/webcam">Webcam</a></li><li><a href="http://127.0.0.1:8000/about">About</a></li>
+          
+         </ul>
+         <svg class="line-bottom" width="750" height="30" viewbox="0,0 1000,40">
+          <polygon class="lb" points="35,53 115,53 125,43 135,53 215,53" />
+          <polygon class="lb" points="285,53 365,53 375,43 385,53 465,53" style="stroke-width: 2px;
+          stroke: orange;
+          fill: orange;"/>
+       
+          <polygon class="lb" points="535,53 615,53 625,43 635,53 715,53" />
+       
+          <polygon class="lb" points="785,53 865,53 875,43 885,53 965,53" />
+         </svg>
+        </div>
+       </div>
+</nav>
+
+  <div class="home_body_container">
+    <div class="container">
+        <div class="input_video">
+            <img src="{% static 'web.jpg' %}" alt="Web Image">
+        </div>
+
+        </div>
+        <div class="team">Team 01</div>
+      </div>
+      
+
+
+
+  
+    <script src="{% static 'video.js' %}"></script>
+  </div>
+</body>
+</html>
