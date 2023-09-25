@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/',  include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import render
 from django.urls import path, include
 from django.urls import path
 from api.views import get_data_from_request
@@ -21,6 +22,8 @@ from api.views import get_data_from_request
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('', render, {'template_name': 'home.html'}, name='home'),
+    path('about/', render, {'template_name': 'about.html'}, name='about'),
     path('mp4/', include('mp4.urls')),
     path('webcam/', include('webcam.urls')),
     path('api/', get_data_from_request),
