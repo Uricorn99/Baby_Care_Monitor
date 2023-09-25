@@ -6,7 +6,7 @@ global_param = {
         "dangertime": 30,
         "warningtime": 10,
         "toggle_notification": 'true',
-        "recording": 'false'        
+        "recording": 'false'
 }
 
 def get_param():

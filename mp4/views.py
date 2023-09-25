@@ -3,6 +3,7 @@ import datetime as dt
 from time import time
 import cv2
 import threading
+import re
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
 from mylib import computer_vision as cv
@@ -48,6 +49,7 @@ def obj_detection_webcam(request):
     # video_capture = cv2.VideoCapture(0) 
     video_capture, video_writer, video_height, video_width = cv.cam_init("Demo.mp4")
     anterior = 0
+    old_record = 'false'
     
     # frame_delay = 0.075  # Set the delay between frames (in seconds)
 
@@ -64,14 +66,35 @@ def obj_detection_webcam(request):
         kt = float(global_param["dangertime"])
         si = float(global_param["warningtime"])*60
         tn = global_param["toggle_notification"]
-
+        record = global_param["recording"]
         # Capture frame-by-frame from the webcam
         ret, frame = video_capture.read()
 
         if not ret:
             
             break
-
+        
+        # 影片錄製
+        if record == "true" and old_record == "false":
+            old_record = record
+            now = dt.datetime.now()
+            video_name = now.strftime("%Y-%m-%d %H:%M:%S")
+            video_name = re.sub(r'[^\w]', '_', video_name)
+            # print('start recording')
+            _,video_writer, _,_= cv.cam_init("Demo.mp4",is_write=True, save_path=f"{video_name}.avi")
+            video_writer.write(frame)
+        elif record == "false" and old_record == "true":
+            old_record = record
+            video_writer.release()
+            _,video_writer, _,_= cv.cam_init(is_write=False)
+            # print('stop recording')
+        elif record == "true" and old_record == "true":
+            video_writer.write(frame)
+            # print('keep recording')
+        else:
+            old_record = record
+        # print(f'record:{record}, old record:{old_record}')
+        
         # 轉換色彩空間 BGR -> RGB
         # frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
