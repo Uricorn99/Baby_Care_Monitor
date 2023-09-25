@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-14354C.svg?logo=python&logoColor=white) ![OpenCV](https://img.shields.io/badge/Opencv-5C3EE8.svg?logo=Opencv&logoColor=white) ![YOLO](https://img.shields.io/badge/YOLO-00FFFF.svg?logo=YOLO&logoColor=black) ![Django](https://img.shields.io/badge/Django-092E20.svg?logo=django&logoColor=white) ![HTML](https://img.shields.io/badge/HTML-239120.svg?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-239120.svg?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-323330.svg?logo=javascript&logoColor=F7DF1E)
 
+- 專案簡報 [![canva](https://img.shields.io/badge/Canva-00C4CC.svg?logo=canva&logoColor=white)](https://www.canva.com/design/DAFuaCpKdco/ZC69DutcrrcdtmkrKOYDMw/view?utm_content=DAFuaCpKdco&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 - Topic 1: 透過 AI 技術辨識嬰兒姿態
 - Topic 2: 結合 Line 應用發出通知
 
