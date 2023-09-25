@@ -1,9 +1,21 @@
 # Baby Care Monitor
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![OpenCV](https://img.shields.io/badge/OpenCV-27338e?style=for-the-badge&logo=OpenCV&logoColor=white) ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green) ![Line](https://img.shields.io/badge/Line-00C300?style=for-the-badge&logo=line&logoColor=white)
+![Python](https://img.shields.io/badge/Python-14354C.svg?logo=python&logoColor=white) ![OpenCV](https://img.shields.io/badge/Opencv-5C3EE8.svg?logo=Opencv&logoColor=white) ![YOLO](https://img.shields.io/badge/YOLO-00FFFF.svg?logo=YOLO&logoColor=black) ![Django](https://img.shields.io/badge/Django-092E20.svg?logo=django&logoColor=white) ![HTML](https://img.shields.io/badge/HTML-239120.svg?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-239120.svg?logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-323330.svg?logo=javascript&logoColor=F7DF1E)
 
+- 專案簡報 [![canva](https://img.shields.io/badge/Canva-00C4CC.svg?logo=canva&logoColor=white)](https://www.canva.com/design/DAFuaCpKdco/ZC69DutcrrcdtmkrKOYDMw/view?utm_content=DAFuaCpKdco&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 - Topic 1: 透過 AI 技術辨識嬰兒姿態
 - Topic 2: 結合 Line 應用發出通知
+
+## Table of Contents
+
+- [Baby Care Monitor](#baby-care-monitor)
+  - [Table of Contents](#table-of-contents)
+  - [Contribute](#contribute)
+  - [Requirement](#requirement)
+  - [Installation](#installation)
+  - [YOLO](#yolo)
+  - [MediaPipe](#mediapipe)
+  - [Usage](#usage)
 
 ## Contribute
 
@@ -15,7 +27,7 @@
 - CUDA Toolkit 11.0.3
 - cuDNN v8.0.5
 
-## Install
+## Installation
 
 - Numpy
   
@@ -60,7 +72,7 @@
   pip install numpy opencv-python opencv-contrib-python Django mediapipe torch==2.0.1 torchvision==0.15.2
   ```
 
-## YOLO (You Only Look Once)
+## YOLO
 
 ![YOLO](https://miro.medium.com/v2/resize:fit:2792/format:webp/1*Co8xD0IWPaBiWr-Xfu38dw.jpeg)
 
