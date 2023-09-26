@@ -4,7 +4,7 @@ from django.http import JsonResponse
 global_param = {
         "acc": 0.5,
         "dangertime": 30,
-        "warningtime": 10,
+        "warningtime": 2,
         "toggle_notification": 'true',
         "recording": 'false'
 }
