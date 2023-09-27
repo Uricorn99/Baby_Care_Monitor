@@ -107,3 +107,10 @@
    ```
 
 3. Web UI![Web UI](./img/WebUI.png)
+
+4. Line notify token: Modify [line.py](./mylib/line.py) line22
+   ```python
+    # Line 22
+    token = "Your line notify token"
+    # modify the token
+  ````
