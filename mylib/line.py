@@ -57,7 +57,7 @@ class Notify:
             try:
                 test_result = detections[0][0]
                 now_time = time()
-                if test_result == "Danger":
+                if test_result == "danger":
                     now_alarm = time()
                     if test_result == self.old_result:
                         if now_alarm - self.first_alarm > kt:
